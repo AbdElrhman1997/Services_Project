@@ -1,0 +1,50 @@
+.category {
+  margin: 40px auto;
+}
+.category .Swiper {
+  /* height: 100px; */
+}
+.category .Swiper .swiper-scrollbar {
+  height: 8px;
+  background-color: transparent;
+}
+.category .Swiper .swiper-scrollbar-drag {
+  height: 8px;
+  background-color: transparent !important;
+}
+
+.category .Swiper .swiper-button-prev {
+  background-color: transparent;
+  width: 18px;
+  height: 18px;
+  border-top: 4px solid transparent;
+  border-right: 4px solid #44add2;
+  border-bottom: 4px solid #44add2;
+  border-left: 4px solid transparent;
+  transform: rotate(315deg) translate(-12px, -10px);
+}
+
+.category .Swiper .swiper-button-next {
+  background-color: transparent;
+  width: 18px;
+  height: 18px;
+  border-top: 4px solid transparent;
+  border-right: 4px solid #44add2;
+  border-bottom: 4px solid #44add2;
+  border-left: 4px solid transparent;
+  transform: rotate(135deg) translate(-10px, -12px);
+}
+
+@media (min-width: 1024px) {
+  .category .Swiper .swiper-button-prev {
+    transform: rotate(315deg) translate(-40px, -25px);
+  }
+  .category .Swiper .swiper-button-next {
+    transform: rotate(135deg) translate(-15px, -37px);
+  }
+}
+
+.category .Swiper .swiper-button-next::after,
+.category .Swiper .swiper-button-prev::after {
+  content: "";
+}

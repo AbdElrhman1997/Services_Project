@@ -1,0 +1,15 @@
+.btn-creativity {
+  background: #44add2;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 30px;
+  color: #fff;
+  transition: 0.22s all ease-in-out;
+  padding: 10px 50px;
+  margin: 40px auto;
+}
+.btn-creativity:hover {
+  background: #fff;
+  color: #44add2;
+  outline: 3px solid #44add2;
+}

@@ -1,0 +1,10 @@
+{
+  "NavBar": {
+    "main": "Main",
+    "aboutUS": "About US",
+    "conference": "Conference",
+    "sponsors": "Sponsors",
+    "login": "Reigister",
+    "events": "Events"
+  }
+}

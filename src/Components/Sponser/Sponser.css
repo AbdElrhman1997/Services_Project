@@ -1,0 +1,22 @@
+.why-this-event {
+  position: relative;
+  padding: 70px 0;
+  overflow: hidden;
+  background: linear-gradient(91deg, #003054 14.71%, #005ea1 90.5%);
+  z-index: 1;
+}
+.btn-why-this-event {
+  background: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 30px;
+  color: #44add2;
+  border: 3px solid #44add2;
+  transition: 0.3s all ease-in-out;
+  padding: 10px 50px;
+  margin: 25px auto;
+}
+.btn-why-this-event:hover {
+  background: #44add2;
+  color: #fff;
+}

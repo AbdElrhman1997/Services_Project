@@ -1,0 +1,8 @@
+footer {
+  padding: 64px;
+  position: relative;
+  background: linear-gradient(91deg, #003054 14.71%, #005ea1 90.5%);
+}
+.footerImg {
+  width: 160px;
+}
