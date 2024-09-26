@@ -1,10 +1,45 @@
 {
-  "NavBar": {
-    "main": "Main",
-    "aboutUS": "About US",
-    "conference": "Conference",
-    "sponsors": "Sponsors",
-    "login": "Reigister",
-    "events": "Events"
+  "HomePage": {
+    "Header": {
+      "home": "Home",
+      "aboutUs": "About Us",
+      "ourServices": "Our Services",
+      "consultations": "Consultations",
+      "level7": "Level 7 Videos",
+      "posts": "Posts",
+      "embroidery": "Embroidery",
+      "employment": "Employment",
+      "courses": "Courses",
+      "products": "Products",
+      "login": "Login"
+    }
+  },
+  "form": {
+    "register": "Register",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "submitting": "Submitting...",
+    "noAccount": "Don't have an account?",
+    "registerHere": "Register here"
+  },
+  "validation": {
+    "nameRequired": "Name is required",
+    "emailRequired": "Email is required",
+    "invalidEmail": "Invalid email format",
+    "phoneRequired": "Phone number is required",
+    "invalidPhone": "Phone must start with 05 and have 10 digits",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password must be at least 6 characters long",
+    "confirmPasswordRequired": "Please confirm your password",
+    "passwordsMustMatch": "Passwords must match"
+  },
+  "success": {
+    "registrationSuccessful": "Registration Successful!"
+  },
+  "error": {
+    "registrationFailed": "Registration Failed!"
   }
 }

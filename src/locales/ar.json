@@ -1,15 +1,45 @@
 {
-  "common": {
-    "main": "الرئيسية",
-    "aboutUS": "نبذه عنا",
-    "conference": "المؤتمر",
-    "sponsors": "الرعاة و العارضون",
-    "login": "للتسجيل",
-    "events": "الفعاليات",
-    "": "",
-    "": "",
-    "": "",
-    "": "",
-    "": ""
+  "HomePage": {
+    "Header": {
+      "home": "الرئيسية",
+      "aboutUs": "من نحن",
+      "ourServices": "خدماتنا",
+      "consultations": "الاستشارات",
+      "level7": "Level 7 Videos",
+      "posts": "البوستات",
+      "embroidery": "التطريز",
+      "employment": "التوظيف",
+      "courses": "الكورسات",
+      "products": "المنتجات",
+      "login": "تسجيل الدخول"
+    }
+  },
+  "form": {
+    "register": "التسجيل",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "submitting": "جارٍ الإرسال...",
+    "noAccount": "ليس لديك حساب؟",
+    "registerHere": "سجل هنا"
+  },
+  "validation": {
+    "nameRequired": "الاسم مطلوب",
+    "emailRequired": "البريد الإلكتروني مطلوب",
+    "invalidEmail": "صيغة البريد الإلكتروني غير صحيحة",
+    "phoneRequired": "رقم الهاتف مطلوب",
+    "invalidPhone": "يجب أن يبدأ رقم الهاتف بـ 05 ويتكون من 10 أرقام",
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "passwordMinLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+    "confirmPasswordRequired": "يرجى تأكيد كلمة المرور",
+    "passwordsMustMatch": "يجب أن تتطابق كلمتا المرور"
+  },
+  "success": {
+    "registrationSuccessful": "تم التسجيل بنجاح!"
+  },
+  "error": {
+    "registrationFailed": "فشل في التسجيل!"
   }
 }

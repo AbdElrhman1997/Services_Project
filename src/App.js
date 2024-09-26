@@ -1,27 +1,56 @@
 import React from "react";
-import Home from "./Pages/Home/Home";
-import About from "./Pages/About/About";
-import WhatIsEvent from "./Components/WhatIsEvent/WhatIsEvent";
-import DigitalTransformation from "./Components/DigitalTransformation/DigitalTransformation";
-import Pricing from "./Components/WhyThisEvent/WhyThisEvent";
-import Contact from "./Pages/Contact/Contact";
-import Navbar from "./Components/Navbar/Navbar";
-import Footer from "./Components/Footer/Footer";
-import { Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home";
+import Services from "./Pages/Services";
+import Posts from "./Pages/Posts";
+import Embroidery from "./Pages/Embroidery";
+import Employment from "./Pages/Employment";
+import Courses from "./Pages/Courses";
+import Products from "./Pages/Products";
+import Footer from "./Components/Footer";
+import Header from "./Components/Header";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./App.css";
+import Register from "./Pages/Register";
+import Login from "./Pages/Login";
+import LanguageToggle from "./Components/LanguageToggle";
+
 function App() {
+  const { i18n } = useTranslation();
+  const defaultRoute = i18n.language === "ar" ? "/ar" : "/en";
+  const location = useLocation();
+
+  // Pages where the header and footer should be hidden
+  const hideHeaderFooterRoutes = [
+    "/en/login",
+    "/en/register",
+    "/ar/login",
+    "/ar/register",
+  ];
+
+  const shouldHideHeaderFooter = hideHeaderFooterRoutes.includes(
+    location.pathname
+  );
+
   return (
     <div className="App">
-      <Navbar />
+      {!shouldHideHeaderFooter && <Header />}
+
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/Services" element={<WhatIsEvent />} />
-        <Route path="/Blog" element={<DigitalTransformation />} />
-        <Route path="/Pricing" element={<Pricing />} />
-        <Route path="/Contact" element={<Contact />} />
+        <Route path="/" element={<Navigate to={defaultRoute} replace />} />
+        <Route path="/ar" element={<Home />} />
+        <Route path="/en" element={<Home />} />
+        <Route path="/:lang/services" element={<Services />} />
+        <Route path="/:lang/posts" element={<Posts />} />
+        <Route path="/:lang/embroidery" element={<Embroidery />} />
+        <Route path="/:lang/employment" element={<Employment />} />
+        <Route path="/:lang/courses" element={<Courses />} />
+        <Route path="/:lang/products" element={<Products />} />
+        <Route path="/:lang/register" element={<Register />} />
+        <Route path="/:lang/login" element={<Login />} />
       </Routes>
-      <Footer />
+      <LanguageToggle />
+      {!shouldHideHeaderFooter && <Footer />}
     </div>
   );
 }
