@@ -17,6 +17,9 @@ const ConsultationsSection = () => {
       try {
         const response = await axios.get(`${BASE_URL}consultations`, {
           params,
+          headers: {
+            "Accept-Language": i18n.language,
+          },
         });
         setConsultations(response?.data?.data?.data); // Assuming response has 'data.data' structure
       } catch (error) {

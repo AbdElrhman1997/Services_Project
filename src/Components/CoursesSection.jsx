@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import backgroundImage from "../public/Images/CoursesBg.jpg"; // Assuming the image path is correct
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const CoursesSection = () => {
   const [courses, setCourses] = useState([]);
@@ -20,6 +21,9 @@ const CoursesSection = () => {
     try {
       const response = await axios.get(`${BASE_URL}courses`, {
         params,
+        headers: {
+          "Accept-Language": i18n.language,
+        },
       });
       setCourses(response?.data?.data?.data);
     } catch (error) {
@@ -33,12 +37,15 @@ const CoursesSection = () => {
 
   return (
     <section
-      className="min-h-[calc(100vh-74px)] bg-cover bg-center lg:grid md:grid grid-cols-2 place-content-center"
+      className="min-h-[calc(100vh-74px)] bg-cover bg-center lg:grid md:grid grid-cols-2 place-content-center pt-8"
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <div className="lg:col-span-1 md:col-span-1 mx-auto text-center lg:px-20 md:px-16 px-4 mb-16">
+      <div
+        className="lg:col-span-1 md:col-span-1 mx-auto text-center lg:px-20 md:px-16 px-4 mb-16"
+        data-aos="fade-right"
+      >
         <p className="text-[#333333] text-5xl font-bold">{courses[0]?.name}</p>
         <p className="text-[#666666] mt-6 mb-16 text-lg font-semibold">
           {courses[0]?.details}
@@ -57,12 +64,12 @@ const CoursesSection = () => {
             className="empty-button my-4"
             style={{ borderRadius: "25px" }}
           >
-            <a
-              href={`${i18n.language == "en" ? `/en/courses` : `ar/courses`}`}
+            <Link
+              to={`/${i18n.language}/courses`}
               className="hover:text-white transition-all duration-200 text-2xl"
             >
               شاهد المزيد من الكورسات
-            </a>
+            </Link>
           </button>
 
           {/* Modal */}

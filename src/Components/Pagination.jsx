@@ -11,7 +11,7 @@ const Pagination = ({ links, handlePageChange }) => {
               disabled={!link.url || link.active}
               className={`${
                 link.active
-                  ? "bg-blue-500 text-white"
+                  ? "bg-[#2481ce] text-white"
                   : "bg-gray-200 text-gray-700"
               } px-3 py-1 mx-1 rounded`}
               dangerouslySetInnerHTML={{ __html: link.label }}

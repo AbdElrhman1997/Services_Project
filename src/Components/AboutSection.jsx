@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-const AboutUsSection = () => {
+const AboutSection = () => {
   const { t, i18n } = useTranslation();
 
   return (
@@ -42,7 +42,7 @@ const AboutUsSection = () => {
 
           {/* Call to Action */}
           <Link
-            to={`${i18n.language == "en" ? "en" : "ar"}/services`}
+            to={`/${i18n.language}/about`}
             className="inline-block px-8 py-3 my-8 bg-[#2481ce] text-white font-semibold rounded-full shadow-md hover:bg-[#1c669b] transition duration-300"
           >
             اكتشف المزيد
@@ -61,4 +61,4 @@ const AboutUsSection = () => {
   );
 };
 
-export default AboutUsSection;
+export default AboutSection;

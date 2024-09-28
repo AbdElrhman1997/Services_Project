@@ -1,25 +1,25 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/autoplay";
-import { Pagination, Autoplay } from "swiper/modules";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const HomeBackgrounds = () => {
   const [backgroundSources, setBackgroundSources] = useState([]);
-  const swiperRef = useRef(null); // Reference to the Swiper instance
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const { i18n } = useTranslation();
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-  // Fetching data from the API
   useEffect(() => {
     const fetchBackgrounds = async () => {
       try {
-        const response = await fetch("http://195.35.37.105:200/api/slider");
-        const data = await response.json();
-
-        // Extract the media paths from the response data
-        const backgrounds = data.data.data.map((item) => ({
-          type: item.media.endsWith(".mp4") ? "video" : "image", // Determine type based on media extension
-          src: `http://195.35.37.105:200/storage/${item.media}`, // Construct the full URL for media
+        const response = await axios.get(`${BASE_URL}slider`, {
+          headers: {
+            "Accept-Language": i18n.language,
+          },
+        });
+        const data = await response?.data?.data?.data;
+        const backgrounds = data.map((item) => ({
+          type: item.media.endsWith(".mp4") ? "video" : "image",
+          src: `http://195.35.37.105:200/storage/${item.media}`,
         }));
 
         setBackgroundSources(backgrounds);
@@ -29,75 +29,67 @@ const HomeBackgrounds = () => {
     };
 
     fetchBackgrounds();
-  }, []);
+  }, [BASE_URL, i18n.language]);
 
-  // Function to handle drag start
-  const handleDragStart = (e, index) => {
-    e.dataTransfer.setData("text/plain", index); // Store the index of the dragged item
-  };
+  // Change slide every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide(
+        (prevSlide) => (prevSlide + 1) % backgroundSources.length
+      );
+    }, 5000); // 5000 ms = 5 seconds
 
-  // Function to handle drop
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const draggedIndex = e.dataTransfer.getData("text/plain");
-    const targetIndex = e.currentTarget.dataset.index;
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, [backgroundSources.length]);
 
-    if (draggedIndex !== targetIndex) {
-      const newBackgroundSources = [...backgroundSources];
-      const [removed] = newBackgroundSources.splice(draggedIndex, 1); // Remove the dragged item
-      newBackgroundSources.splice(targetIndex, 0, removed); // Insert it into the new position
-      setBackgroundSources(newBackgroundSources);
-    }
-  };
-
-  // Function to handle drag over
-  const handleDragOver = (e) => {
-    e.preventDefault(); // Prevent default to allow drop
+  const handleDotClick = (index) => {
+    setCurrentSlide(index);
   };
 
   return (
     <div className="relative overflow-hidden min-h-screen">
-      <Swiper
-        ref={swiperRef}
-        modules={[Pagination, Autoplay]}
-        slidesPerView={1}
-        autoplay={{
-          delay: 5000, // Delay between transitions
-          disableOnInteraction: false, // Keep autoplay running after user interactions
-        }}
-        loop={true}
-        pagination={{ clickable: true }}
-        className="h-full w-full"
-        style={{ height: "100vh" }}
-      >
-        {backgroundSources.map((bg, index) => (
-          <SwiperSlide
+      {backgroundSources.length > 0 && (
+        <div className="absolute inset-0 w-full h-full">
+          {backgroundSources.map((bg, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlide ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              {bg.type === "video" ? (
+                <video
+                  src={bg.src}
+                  muted
+                  loop
+                  autoPlay={index === currentSlide}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <img
+                  src={bg.src}
+                  alt={`Background ${index + 1}`}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Dots Navigation */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        {backgroundSources.map((_, index) => (
+          <button
             key={index}
-            draggable
-            onDragStart={(e) => handleDragStart(e, index)}
-            onDragOver={handleDragOver}
-            onDrop={handleDrop}
-            data-index={index} // Set the index as data attribute for drop target
-          >
-            {bg.type === "video" ? (
-              <video
-                src={bg.src}
-                autoPlay
-                // muted
-                loop
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            ) : (
-              <img
-                src={bg.src}
-                alt={`Background ${index + 1}`}
-                className="absolute inset-0 w-full h-full object-cover"
-                loading="lazy" // Use lazy loading for images
-              />
-            )}
-          </SwiperSlide>
+            onClick={() => handleDotClick(index)}
+            className={`w-3 h-3 rounded-full ${
+              index === currentSlide ? "bg-[#2481ce]" : "bg-gray-600"
+            } transition-all duration-300`}
+          />
         ))}
-      </Swiper>
+      </div>
 
       {/* Main content */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center h-full text-white">

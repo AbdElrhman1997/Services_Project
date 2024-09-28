@@ -15,7 +15,12 @@ const ServicesSection = () => {
         dataLimit: 3,
       };
       try {
-        const response = await axios.get(`${BASE_URL}services`, { params });
+        const response = await axios.get(`${BASE_URL}services`, {
+          params,
+          headers: {
+            "Accept-Language": i18n.language,
+          },
+        });
         setServices(response?.data?.data?.data); // Assuming response has 'data.data' structure
       } catch (error) {
         console.error("Error fetching services:", error);

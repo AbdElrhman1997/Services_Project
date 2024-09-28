@@ -14,6 +14,9 @@ import "./App.css";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import LanguageToggle from "./Components/LanguageToggle";
+import About from "./Pages/About";
+import Consultations from "./Pages/Consultations";
+import Level7 from "./Pages/Level7";
 
 function App() {
   const { i18n } = useTranslation();
@@ -40,7 +43,10 @@ function App() {
         <Route path="/" element={<Navigate to={defaultRoute} replace />} />
         <Route path="/ar" element={<Home />} />
         <Route path="/en" element={<Home />} />
+        <Route path="/:lang/about" element={<About />} />
         <Route path="/:lang/services" element={<Services />} />
+        <Route path="/:lang/consultations" element={<Consultations />} />
+        <Route path="/:lang/level7" element={<Level7 />} />
         <Route path="/:lang/posts" element={<Posts />} />
         <Route path="/:lang/embroidery" element={<Embroidery />} />
         <Route path="/:lang/employment" element={<Employment />} />

@@ -16,6 +16,9 @@ const EmploymentSection = () => {
     try {
       const response = await axios.get(`${BASE_URL}courses`, {
         params,
+        headers: {
+          "Accept-Language": i18n.language,
+        },
       });
       setEmployment(response?.data?.data?.data);
     } catch (error) {

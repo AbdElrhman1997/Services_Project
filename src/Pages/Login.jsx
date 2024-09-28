@@ -26,7 +26,11 @@ const Login = () => {
 
   const onSubmit = (values, { setSubmitting, resetForm }) => {
     axios
-      .post(`${BASE_URL}login`, values)
+      .post(`${BASE_URL}login`, values, {
+        headers: {
+          "Accept-Language": i18n.language,
+        },
+      })
       .then((response) => {
         toast.success(t("success.registrationSuccessful"));
         resetForm();

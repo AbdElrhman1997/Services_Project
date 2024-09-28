@@ -79,10 +79,10 @@ body {
   background-size: cover;
   color: #fff;
   display: flex;
-  height: 37vh;
+  min-height: 37vh;
   justify-content: center;
   text-align: center;
-  padding: 150px 0;
+  padding: 80px 0;
 }
 
 .detilas-p {

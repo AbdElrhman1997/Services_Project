@@ -1,24 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom"; // Import useLocation
+import { useLocation } from "react-router-dom";
 import EnFlag from "../public/Images/united-kingdom.png";
 import ArFlag from "../public/Images/flag.png";
 
 const LanguageToggle = () => {
   const { i18n } = useTranslation();
   const currentLocale = i18n.language;
-  const location = useLocation(); // Get the current location
+  const location = useLocation();
+
+  // On component mount, check if a language is stored in localStorage
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem("appLanguage");
+    if (storedLanguage && storedLanguage !== currentLocale) {
+      i18n.changeLanguage(storedLanguage);
+    }
+  }, [i18n, currentLocale]);
 
   const toggleLanguage = () => {
     const newLocale = currentLocale === "en" ? "ar" : "en";
     i18n.changeLanguage(newLocale);
+
+    // Store the selected language in localStorage
+    localStorage.setItem("appLanguage", newLocale);
 
     // Update the URL to reflect the language change while keeping the same route
     const newPath = location.pathname.replace(
       `/${currentLocale}`,
       `/${newLocale}`
     );
+
     window.history.pushState(null, "", newPath); // Update the URL without reloading the page
+
+    // Refresh the page to reflect the language change
+    window.location.reload();
   };
 
   return (
