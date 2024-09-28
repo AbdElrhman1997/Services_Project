@@ -33,10 +33,10 @@ body {
   padding: 7px 24px;
   border-radius: 12px;
   background-color: transparent;
-  border: 1.7px solid var(--main-color);
+  border: 2px solid var(--main-color);
   transition: 0.15s ease-in-out;
   text-align: center;
-  font-weight: 700;
+  font-weight: 800;
 }
 .empty-button:hover {
   background-color: var(--main-color);
@@ -69,4 +69,26 @@ body {
   background-color: #2481ce; /* Active dot color */
   width: 14px;
   height: 14px;
+}
+
+.employement-section {
+  align-items: center;
+  background: linear-gradient(135deg, #2481ce, #1c669b); /* Main color */
+  background-attachment: fixed;
+  background-position: 50%;
+  background-size: cover;
+  color: #fff;
+  display: flex;
+  height: 37vh;
+  justify-content: center;
+  text-align: center;
+  padding: 150px 0;
+}
+
+.detilas-p {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 2.5;
 }

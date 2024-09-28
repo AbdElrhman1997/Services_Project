@@ -41,7 +41,10 @@ const Header = () => {
         {/* Language Toggle Button */}
         <div className="flex items-center">
           <button className="empty-button">
-            <Link to={`${langPrefix}/login`} className="hover:text-gray-300">
+            <Link
+              to={`${langPrefix}/login`}
+              className="hover:text-gray-300 transition-all duration-300"
+            >
               {t("HomePage.Header.login")}
             </Link>
           </button>
