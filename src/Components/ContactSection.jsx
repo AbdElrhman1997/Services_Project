@@ -1,42 +1,111 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const ContactSection = () => {
+  const { t, i18n } = useTranslation();
+
+  const [settingsData, setSettingsData] = useState();
+
+  useEffect(() => {
+    const fetchSocialLinks = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}setting`,
+          {
+            headers: {
+              "Accept-Language": i18n.language,
+            },
+          }
+        );
+        const data = JSON.stringify(response?.data?.data, null, 2);
+        setSettingsData(JSON.parse(data));
+      } catch (error) {
+        console.error("Error fetching social links:", error);
+      }
+    };
+
+    fetchSocialLinks();
+  }, []);
+
   return (
-    <section className="py-16 px-6 bg-gray-100">
+    <section
+      className="py-16 px-6 bg-gray-100 rtl:text-right ltr:text-left"
+      dir={i18n.language === "ar" ? "rtl" : "ltr"}
+    >
       <div className="container mx-auto text-center">
         {/* Section Title */}
-        <h2 className="text-4xl font-bold mb-6 text-[#2481ce]">تواصل معنا</h2>
+        <h2 className="text-4xl font-bold mb-63 text-[#2481ce]">
+          {t("contact.title")}
+        </h2>
 
         {/* Section Description */}
-        <p className="text-lg mb-8 text-gray-700">
-          نحن هنا للإجابة على أي استفسارات أو اقتراحات. لا تتردد في التواصل معنا
-          من خلال الوسائل التالية:
-        </p>
+        <p className="text-lg mb-8 text-gray-700">{t("contact.description")}</p>
 
         {/* Contact Information */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-gray-800 mb-10">
-          {/* Address */}
-          <div className="bg-white shadow-md rounded-lg p-6 border-t-4 border-[#2481ce]">
-            <h3 className="text-2xl font-semibold mb-4">عنوان المكتب</h3>
-            <p>123 شارع النجاح، مدينة المستقبل، المملكة العربية السعودية</p>
-          </div>
-
-          {/* Phone */}
-          <div className="bg-white shadow-md rounded-lg p-6 border-t-4 border-[#2481ce]">
-            <h3 className="text-2xl font-semibold mb-4">الهاتف</h3>
-            <p>+966 123 456 789</p>
-          </div>
-
           {/* Email */}
           <div className="bg-white shadow-md rounded-lg p-6 border-t-4 border-[#2481ce]">
-            <h3 className="text-2xl font-semibold mb-4">البريد الإلكتروني</h3>
-            <p>contact@company.com</p>
+            <h3 className="text-2xl font-semibold mb-4">
+              {t("contact.emailTitle")}
+            </h3>
+            <p>{t("contact.email")}</p>
+          </div>
+          {/* Phone */}
+          <div className="bg-white shadow-md rounded-lg p-6 border-t-4 border-[#2481ce]">
+            <h3 className="text-2xl font-semibold mb-4">
+              {t("contact.phoneTitle")}
+            </h3>
+            <p>{settingsData?.support_whatsapp}</p>
+          </div>
+          <div className="bg-white shadow-md rounded-lg p-6 border-t-4 border-[#2481ce]">
+            <h3 className="text-xl font-semibold mb-4">
+              {t("footer.socialLinks")}
+            </h3>
+            <ul className="flex gap-x-6 justify-center">
+              <li className="my-2">
+                <a
+                  href={`${settingsData?.x}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-gray-300 text-lg flex items-center"
+                >
+                  <FaTwitter className="mr-2 text-3xl" />
+                </a>
+              </li>
+              <li className="my-2">
+                <a
+                  href={`${settingsData?.insta}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-gray-300 text-lg flex items-center"
+                >
+                  <FaInstagram className="mr-2 text-3xl" />
+                </a>
+              </li>
+              <li className="my-2">
+                <a
+                  href={`${settingsData?.facebook}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-gray-300 text-lg flex items-center"
+                >
+                  <FaFacebook className="mr-2 text-3xl" />
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
         {/* Call to Action Button */}
         <button className="bg-[#2481ce] text-white px-8 py-4 rounded-full hover:bg-[#1c669b] transition duration-300">
-          اتصل بنا الآن
+          <a
+            href={`tel:${settingsData?.support_whatsapp}`}
+            className="hover:text-gray-300 text-lg"
+          >
+            {t("contact.ctaButton")}
+          </a>
         </button>
 
         {/* Social Media */}

@@ -14,7 +14,7 @@ const CoursesSection = () => {
     setModalOpen(!isModalOpen);
   };
 
-  const fetchConsultations = async () => {
+  const fetchCourses = async () => {
     const params = {
       dataLimit: 1,
     };
@@ -27,25 +27,22 @@ const CoursesSection = () => {
       });
       setCourses(response?.data?.data?.data);
     } catch (error) {
-      console.error("Error fetching services:", error);
+      console.error("Error fetching courses:", error);
     }
   };
 
   useEffect(() => {
-    fetchConsultations();
+    fetchCourses();
   }, []);
 
   return (
     <section
-      className="min-h-[calc(100vh-74px)] bg-cover bg-center lg:grid md:grid grid-cols-2 place-content-center pt-8"
+      className="min-h-[calc(100vh-64px)] bg-cover bg-center lg:grid md:grid grid-cols-2 place-content-center pt-8 rtl:text-right ltr:text-left"
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <div
-        className="lg:col-span-1 md:col-span-1 mx-auto text-center lg:px-20 md:px-16 px-4 mb-16"
-        data-aos="fade-right"
-      >
+      <div className="lg:col-span-1 md:col-span-1 mx-auto text-center lg:px-20 md:px-16 px-4 mb-16">
         <p className="text-[#333333] text-5xl font-bold">{courses[0]?.name}</p>
         <p className="text-[#666666] mt-6 mb-16 text-lg font-semibold">
           {courses[0]?.details}
@@ -57,7 +54,7 @@ const CoursesSection = () => {
             onClick={handleModalToggle} // Toggle modal on button click
           >
             <span className="hover:text-white transition-all duration-200 text-2xl">
-              تعرف على تفاصيل الدورة
+              {t("courses.detailsButton")}
             </span>
           </button>
           <button
@@ -68,7 +65,7 @@ const CoursesSection = () => {
               to={`/${i18n.language}/courses`}
               className="hover:text-white transition-all duration-200 text-2xl"
             >
-              شاهد المزيد من الكورسات
+              {t("courses.viewMore")}
             </Link>
           </button>
 

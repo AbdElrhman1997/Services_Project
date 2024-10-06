@@ -13,8 +13,10 @@ import Image10 from "../public/Images/Artboard 10.png";
 import Image11 from "../public/Images/Artboard 11.png";
 import Image12 from "../public/Images/Artboard 12.png";
 import Image13 from "../public/Images/Artboard 13.png";
+import { useTranslation } from "react-i18next";
 
 const NewsTicker = () => {
+  const { t } = useTranslation();
   const images = [
     Image1,
     Image2,
@@ -34,7 +36,7 @@ const NewsTicker = () => {
   return (
     <div className="mb-20">
       <p className="text-black text-4xl text-center font-semibold mb-12 mt-12">
-        نخدم نخبة من الشركات الرائدة
+        {t("common.NewsTickerTitle")}
       </p>
       <Marquee direction="left" loop={0} autoFill={true} speed={200}>
         {images.map((src, index) => (

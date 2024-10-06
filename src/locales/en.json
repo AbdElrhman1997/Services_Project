@@ -1,4 +1,9 @@
 {
+  "common": {
+    "orderViaWhatsapp": "Order service via WhatsApp",
+    "currency": "SAR",
+    "NewsTickerTitle": "We serve a selection of leading companies"
+  },
   "HomePage": {
     "Header": {
       "home": "Home",
@@ -11,6 +16,7 @@
       "employment": "Employment",
       "courses": "Courses",
       "products": "Products",
+      "batrouns": "Batrouns",
       "login": "Login"
     }
   },
@@ -23,7 +29,12 @@
     "confirmPassword": "Confirm Password",
     "submitting": "Submitting...",
     "noAccount": "Don't have an account?",
-    "registerHere": "Register here"
+    "registerHere": "Register here",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "acceptTerms": "I accept the",
+    "terms&conditions": "terms and conditions",
+    "termsRequired": "You must accept the terms and conditions to register"
   },
   "validation": {
     "nameRequired": "Name is required",
@@ -41,5 +52,107 @@
   },
   "error": {
     "registrationFailed": "Registration Failed!"
+  },
+  "about": {
+    "title": "About Us",
+    "description": "We are a company specialized in providing the best solutions and services, committed to innovation and quality. Our vision is to contribute to the development of industries through advanced technology and creativity. We proudly serve our clients around the world with a focus on meeting their needs and delivering the best possible outcomes. We are a company specialized in providing the best solutions and services, committed to innovation and quality. Our vision is to contribute to the development of industries through advanced technology and creativity. We proudly serve our clients around the world with a focus on meeting their needs and delivering the best possible outcomes. With a focus on meeting their needs and delivering the best possible outcomes, we are a company specialized in providing the best solutions and services, committed to innovation and quality. Our vision is to contribute to the development of industries through advanced technology and creativity. We proudly serve our clients around the world with a focus on meeting their needs and delivering the best possible outcomes.",
+    "cta": "Discover More"
+  },
+  "consultations": {
+    "header": "Consultations",
+    "subheader": "Specialized consultations to achieve your goals",
+    "free": "Free",
+    "orderButton": "Order Service via WhatsApp",
+    "orderMessage": "I want to request the service"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "We are here to answer any inquiries or suggestions. Feel free to reach out to us through the following means:",
+    "addressTitle": "Office Address",
+    "address": "123 Success Street, Future City, Kingdom of Saudi Arabia",
+    "phoneTitle": "Phone",
+    "phone": "+966 123 456 789",
+    "emailTitle": "Email",
+    "email": "contact@company.com",
+    "ctaButton": "Contact Us Now"
+  },
+  "courses": {
+    "detailsButton": "Learn More About the Course",
+    "viewMore": "View More Courses",
+    "subscribeToCourse": "Subscribe to the course",
+    "myCourses": "My Courses",
+    "allCourses": "New courses you may like ",
+    "courseContent": "Course Content",
+    "course": "Course"
+  },
+  "employment": {
+    "applyNow": "Apply Now",
+    "moreJobs": "More Jobs"
+  },
+  "services": {
+    "services_title": "Our Services",
+    "services_subtitle": "We offer the best solutions",
+    "service_free": "Free",
+    "order_service_via_whatsapp": "I want to order the service"
+  },
+  "footer": {
+    "quick_links": "Quick Links",
+    "about_us": "About Us",
+    "our_services": "Our Services",
+    "contact_us": "Contact Us",
+    "email": "test@gmail.com",
+    "phone_number": "+96651234567",
+    "support": "Support",
+    "faq": "FAQ",
+    "terms_of_service": "Terms of Service",
+    "privacy_policy": "Privacy Policy",
+    "about_company": "About Company",
+    "about_company_text": "We are committed to providing the best solutions and services for our clients.",
+    "copyright": "Test. All rights reserved.",
+    "socialLinks": "Social Links"
+  },
+  "posts": {
+    "title": "Posts",
+    "alt": {
+      "aboutImage": "About the Image",
+      "profileImage": "Profile Image",
+      "serviceImage": "Service Image"
+    },
+    "days": {
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday"
+    },
+    "months": {
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "December"
+    },
+    "time": {
+      "am": "AM",
+      "pm": "PM"
+    },
+    "whatsappOrderText": "I would like to order this service.",
+    "orderServiceWhatsApp": "Order service via WhatsApp"
+  },
+  "profile": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "editProfile": "Edit Profile",
+    "logout": "Logout"
   }
 }

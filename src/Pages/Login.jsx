@@ -35,11 +35,16 @@ const Login = () => {
         toast.success(t("success.registrationSuccessful"));
         resetForm();
         const homeRoute = i18n.language === "ar" ? "/ar" : "/en";
+        localStorage.setItem("authUser", JSON.stringify(response?.data?.data));
+        localStorage.setItem(
+          "authToken",
+          JSON.stringify(response?.data?.token)
+        );
         navigate(homeRoute);
       })
       .catch((error) => {
         console.error("There was an error login!", error);
-        toast.error(t("error.registrationFailed"));
+        toast.error(error?.response?.data?.message);
       })
       .finally(() => {
         setSubmitting(false);

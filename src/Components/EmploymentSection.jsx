@@ -31,27 +31,27 @@ const EmploymentSection = () => {
   }, []);
 
   return (
-    <section className="employement-section" dir="rtl">
-      <div className="lg:px-16 md:px-16 px-5 text-right">
+    <section
+      className="employement-section rtl:text-right ltr:text-left"
+      dir={i18n.language === "ar" ? "rtl" : "ltr"}
+    >
+      <div className="lg:px-16 md:px-16 px-5">
         <div className="lg:grid md:grid grid-cols-12 gap-6 mx-auto w-fit items-center">
           <div className="lg:col-span-6 md:col-span-6 col-span-12 lg:px-16 md:px-16 px-5 my-auto text-white">
-            <p className="text-4xl" style={{ fontWeight: "bold" }}>
+            <p className="text-4xl mb-8" style={{ fontWeight: "bold" }}>
               {employment[0]?.name}
             </p>
-            <p className="text-xl my-3 text-justify">
-              {" "}
-              {employment[0]?.details}
-            </p>
+            <p className="text-xl my-3 detilas-p"> {employment[0]?.details}</p>
           </div>
           <div className="lg:col-span-6 md:col-span-6 col-span-12 lg:block md:block flex justify-center">
             {/* Filled button */}
             <button className="bg-[#2481ce] text-white text-xl m-2 lg:px-8 md:px-8 px-2 py-3 rounded-full transition duration-300 hover:bg-[#1c669b] font-bold lg:min-w-[220px] md:min-w-[220px] min-w-[50%]">
-              <a href="/ar/sponsor#sponserForm">قدم الان</a>
+              <a href="/ar/sponsor#sponserForm">{t("employment.applyNow")}</a>
             </button>
 
             {/* Empty button */}
             <button className="bg-[#2481ce] text-white text-xl m-2  lg:px-8 md:px-8 px-2  py-3 rounded-full transition duration-300 hover:bg-[#1c669b] font-bold lg:min-w-[220px] md:min-w-[220px] min-w-[50%] ">
-              <a href="/ar/sponsor#sponserForm">المزيد من الوظائف</a>
+              <a href="/ar/sponsor#sponserForm">{t("employment.moreJobs")}</a>
             </button>
           </div>
         </div>
