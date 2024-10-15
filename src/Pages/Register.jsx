@@ -36,7 +36,7 @@ const Register = () => {
 
   useEffect(() => {
     fetchTerms();
-  }, []);
+  }, [i18n.language]);
 
   const initialValues = {
     name: "",

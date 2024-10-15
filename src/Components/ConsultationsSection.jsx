@@ -41,7 +41,7 @@ const ConsultationsSection = () => {
 
   useEffect(() => {
     fetchServices();
-  }, [currentPage]);
+  }, [currentPage, i18n.language]);
 
   const handlePageChange = (url) => {
     if (url) {
@@ -67,20 +67,23 @@ const ConsultationsSection = () => {
   };
 
   return (
-    <section className="pb-12 bg-gray-50 pt-8" dir="rtl">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-800">
+    <section
+      className="pb-12 bg-[#2482ce23] pt-8"
+      dir={i18n?.language == "ar" ? "rtl" : "ltr"}
+    >
+      <div className="text-center mb-8 px-3">
+        <h2 className="xl:text-5xl lg:text-5xl md:text-5xl text-3xl font-semibold text-[#2482ced8]">
           {t("consultations.header")}
         </h2>
-        <p className="mt-2 text-gray-600 mb-4">
+        <p className="mt-2 xl:text-2xl lg:text-2xl md:text-2xl text-xl font-semibold text-[#2482ced8] mb-4">
           {t("consultations.subheader")}
         </p>
       </div>
-      <div className="max-w-[85rem] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[200px] my-8 px-4 ">
+      <div className="max-w-[85rem] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[200px] my-8 px-4 text-white">
         {services?.length ? (
           services.map((service) => (
             <div
-              className="card shadow-xl rounded-2xl relative overflow-hidden cursor-pointer transform hover:scale-105 duration-300 hover:opacity-90"
+              className="card shadow-xl rounded-2xl relative overflow-hidden cursor-pointer transform hover:scale-105 duration-300 hover:opacity-90 bg-white"
               key={service.id}
             >
               {/* Free Badge */}
@@ -92,15 +95,17 @@ const ConsultationsSection = () => {
                 ) : (
                   <div className="absolute top-6 -left-12 bg-gradient-to-r from-[#2481ce] to-[#1e6bb8] text-white font-bold px-2 py-[6px] text-lg transform rotate-[-45deg] shadow-lg w-[200px] text-center">
                     {service?.price -
-                      (service?.price * service?.discount) / 100}
+                      (service?.price * service?.discount) / 100}{" "}
+                    {t("common.currency")}
                   </div>
                 )}
                 <div className="absolute top-6 -right-12 bg-gradient-to-r from-[#2481ce] to-[#1e6bb8] text-white font-bold px-2 py-[6px] text-lg transform rotate-[45deg] shadow-lg w-[200px] text-center line-through">
-                  {service?.price} ر.س
+                  {service?.price}
+                  {t("common.currency")}
                 </div>
                 {service?.media ? (
                   <img
-                    src={`http://195.35.37.105:200/storage/${service?.media}`}
+                    src={`${process.env.REACT_APP_MAIN_URL}/storage/${service?.media}`}
                     className="w-full h-60 object-cover"
                     style={{ borderRadius: "1rem 1rem 0 0" }}
                     alt="batroun_image"
@@ -120,11 +125,14 @@ const ConsultationsSection = () => {
                   {service?.details}
                 </p>
               </div>
-              <div className="flex justify-between items-center px-6 py-[14px]">
+              <div className="flex justify-between items-center px-6 py-[14px] text-[#2482ced8]">
                 <div className="flex justify-center py-4 mx-auto">
                   <a
-                    href={`https://wa.me/${orderPhone}`}
+                    href={`https://wa.me/${orderPhone}?text=${encodeURIComponent(
+                      `مرحبا : هل يمكنني طلب هذه الخدمة ${service?.name}`
+                    )}`}
                     className="empty-button transform hover:scale-110 hover:shadow-lg"
+                    target="_blank"
                     style={{ borderRadius: "40px", fontSize: "17px" }}
                   >
                     {t("consultations.orderButton")}
@@ -143,8 +151,7 @@ const ConsultationsSection = () => {
       {/* Modal */}
       {selectedService && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center modal-overlay rtl:text-right ltr:text-left"
-          dir={i18n.language === "ar" ? "rtl" : "ltr"}
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center modal-overlay overflow-auto"
           onClick={handleBackgroundClick} // Handle background click
         >
           <div
@@ -158,12 +165,38 @@ const ConsultationsSection = () => {
               &times;
             </button>
 
-            <div className="flex flex-col md:flex-row">
-              <div className="xl:w-1/2 lg:w-1/2 w-full">
+            <div className="flex flex-col lg:flex-row">
+              <div className="xl:w-1/2 lg:w-1/2 w-full pt-12 px-6">
+                <div>
+                  <h2 className="text-3xl font-bold text-slate-800 mt-5">
+                    {selectedService.name}
+                  </h2>
+                  <p className="mt-4 text-gray-500 px-3 leading-9 min-h-[150px] xl:max-h-[300px] lg:max-h-[300px] md:max-h-[300px] max-h-[200px] overflow-y-auto text-justify">
+                    {selectedService.details}
+                  </p>
+                </div>
+
+                {/* Order Button */}
+                <div className="flex justify-between items-center px-6 py-[14px] mt-4">
+                  <div className="flex justify-center py-4 mx-auto">
+                    <a
+                      href={`https://wa.me/${orderPhone}?text=${encodeURIComponent(
+                        `مرحبا : هل يمكنني طلب هذه الخدمة ${selectedService?.name}`
+                      )}`}
+                      target="_blank"
+                      className="empty-button transform hover:scale-110 hover:shadow-lg text-main"
+                      style={{ borderRadius: "40px", fontSize: "17px" }}
+                    >
+                      {t("common.orderViaWhatsapp")}
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="xl:w-1/2 lg:w-1/2 w-full flex justify-end items-center">
                 {selectedService?.media ? (
                   <img
-                    src={`http://195.35.37.105:200/storage/${selectedService.media}`}
-                    className="w-full h-full object-cover"
+                    src={`${process.env.REACT_APP_MAIN_URL}/storage/${selectedService.media}`}
+                    className="xl:w-[460px] lg:w-[460px] md:w-[460px] w-full xl:h-[460px] lg:h-[460px] md:h-[460px] h-[220px] object-cover"
                     alt={selectedService.name}
                   />
                 ) : (
@@ -173,30 +206,6 @@ const ConsultationsSection = () => {
                     className="rounded-lg shadow-lg transform transition duration-500 hover:scale-105 mx-auto"
                   />
                 )}
-              </div>
-              {/* Content Section */}
-              <div className="xl:w-1/2 lg:w-1/2 w-full py-12 px-6">
-                <div>
-                  <h2 className="text-3xl font-bold text-slate-800 mt-5">
-                    {selectedService.name}
-                  </h2>
-                  <p className="mt-4 text-gray-500 px-6 leading-9 min-h-[150px]">
-                    {selectedService.details}
-                  </p>
-                </div>
-
-                {/* Order Button */}
-                <div className="flex justify-between items-center px-6 py-[14px] mt-10">
-                  <div className="flex justify-center py-4 mx-auto">
-                    <a
-                      href={`https://wa.me/${orderPhone}`}
-                      className="empty-button transform hover:scale-110 hover:shadow-lg"
-                      style={{ borderRadius: "40px", fontSize: "17px" }}
-                    >
-                      {t("consultations.orderButton")}
-                    </a>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

@@ -9,7 +9,7 @@ import SectionBg from "../public/Images/sections-bg.png";
 import { FaPlay } from "react-icons/fa";
 import { AppContext } from "../Contexts/AppContext";
 
-const Courses = () => {
+const Batrouns = () => {
   const [services, setServices] = useState([]);
   const [myBatrouns, setMyBatrouns] = useState([]);
   const [paginationData, setPaginationData] = useState(null);
@@ -65,7 +65,7 @@ const Courses = () => {
   useEffect(() => {
     fetchMyCourses();
     fetchAllCourses();
-  }, []);
+  }, [i18n.language]);
 
   const handlePageChange = (url) => {
     if (url) {
@@ -126,44 +126,63 @@ const Courses = () => {
               i18n.language === "ar" ? "w-[120px]" : "w-[200px]"
             }`}
           >
-            {t("courses.myCourses")}
+            {t("common.myBatrouns")}
           </h2>
+          {console.log(myBatrouns?.batrouns)}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[200px]">
             {!loadingMyCourses ? (
-              services.map((service) => (
+              myBatrouns?.map((service) => (
                 <div
-                  className="card shadow-xl rounded-2xl relative overflow-hidden cursor-pointer transform hover:scale-105 duration-300 hover:opacity-90 pt-6"
-                  onClick={() => openModal(service)} // Open modal when card clicked
-                  key={service.id}
+                  className="card shadow-xl rounded-2xl relative overflow-hidden cursor-pointer transform hover:scale-105 duration-300 hover:opacity-90 pt-12"
+                  key={service?.id}
                 >
                   {/* Free Badge */}
-                  {service?.is_free ? (
+                  {service?.batrouns?.is_free ? (
                     <div className="absolute top-6 -left-12 bg-green-500 text-white font-bold px-2 py-[6px] text-lg transform rotate-[-45deg] shadow-lg w-[200px] text-center">
                       Free
                     </div>
                   ) : (
                     <div className="absolute top-6 -left-12 bg-gradient-to-r from-[#2481ce] to-[#1e6bb8] text-white font-bold px-2 py-[6px] text-lg transform rotate-[-45deg] shadow-lg w-[200px] text-center">
-                      {service?.price -
-                        (service?.price * service?.discount) / 100}
+                      {service?.batrouns?.price -
+                        (service?.batrouns?.price *
+                          service?.batrouns?.discount) /
+                          100}
+                      {t("common.currency")}
                     </div>
                   )}
-                  <div className="absolute top-6 -right-12 bg-gradient-to-r from-[#2481ce] to-[#1e6bb8] text-white font-bold px-2 py-[6px] text-lg transform rotate-[45deg] shadow-lg w-[200px] text-center line-through">
-                    {service?.price} ر.س
+                  <div onClick={() => openModal(service)}>
+                    <div className="absolute top-6 -right-12 bg-gradient-to-r from-[#2481ce] to-[#1e6bb8] text-white font-bold px-2 py-[6px] text-lg transform rotate-[45deg] shadow-lg w-[200px] text-center line-through">
+                      {service?.batrouns?.price} {t("common.currency")}
+                    </div>
+                    <p className="px-6 text-slate-800 font-bold mt-6 mb-3 text-2xl">
+                      {service?.batrouns?.name}
+                    </p>
+                    <p className="flex px-6 text-gray-500 min-h-[160px] detilas-p hover:opacity-75 cursor-pointer">
+                      {service?.batrouns?.details}
+                    </p>
+                    <div className=" justify-center gap-x-4 mt-8">
+                      <p className="flex px-6 text-gray-500  cursor-pointer gap-4 font-semibold">
+                        <p className="bg-main text-white w-1/2 rounded-lg flex justify-center items-center px-4 py-1 text-sm">
+                          Category : {service?.batrouns?.category?.name}
+                        </p>
+                        <p className="bg-main text-white w-1/2 rounded-lg flex justify-center items-center px-4 py-1 text-sm">
+                          Size : {service?.batrouns?.size?.name}
+                        </p>
+                      </p>
+                    </div>
                   </div>
-                  <p className="px-6 text-slate-800 font-bold mt-6 mb-3 text-2xl">
-                    {service?.name}
-                  </p>
-                  <p className="flex px-6 text-gray-500 min-h-[160px] detilas-p hover:opacity-75 cursor-pointer">
-                    {service?.details}
-                  </p>
+                  {console.log(service?.batrouns)}
                   <div className="flex justify-between items-center px-6 py-[14px]">
                     <div className="flex justify-center py-4 mx-auto">
                       <a
-                        href={`https://wa.me/${orderPhone}`}
+                        href={`${process.env.REACT_APP_MAIN_URL}/storage/${service?.batrouns?.file}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="empty-button transform hover:scale-110 hover:shadow-lg"
                         style={{ borderRadius: "40px", fontSize: "17px" }}
+                        download={service?.batrouns?.file}
                       >
-                        {t("common.orderViaWhatsapp")}
+                        {t("common.downloadBatroun")}
                       </a>
                     </div>
                   </div>
@@ -183,10 +202,10 @@ const Courses = () => {
         {myBatrouns?.length ? (
           <h2
             className={`text-3xl font-bold text-gray-600 mb-8 border-b-4 border-[#2481ce] pb-3 mx-auto ${
-              i18n.language === "ar" ? "w-[280px]" : "w-[400px]"
+              i18n.language === "ar" ? "w-[320px]" : "w-[400px]"
             }`}
           >
-            {t("courses.allCourses")}
+            {t("common.anotherBatrouns")}
           </h2>
         ) : null}
 
@@ -194,7 +213,7 @@ const Courses = () => {
           {services?.length ? (
             services.map((service) => (
               <div
-                className="card shadow-xl rounded-2xl relative overflow-hidden cursor-pointer transform hover:scale-105 duration-300 hover:opacity-90"
+                className="card shadow-xl rounded-2xl relative overflow-hidden cursor-pointer transform hover:scale-105 duration-300 hover:opacity-90 pt-12"
                 onClick={() => openModal(service)} // Open modal when card clicked
                 key={service.id}
               >
@@ -207,10 +226,11 @@ const Courses = () => {
                   <div className="absolute top-6 -left-12 bg-gradient-to-r from-[#2481ce] to-[#1e6bb8] text-white font-bold px-2 py-[6px] text-lg transform rotate-[-45deg] shadow-lg w-[200px] text-center">
                     {service?.price -
                       (service?.price * service?.discount) / 100}
+                    {t("common.currency")}
                   </div>
                 )}
                 <div className="absolute top-6 -right-12 bg-gradient-to-r from-[#2481ce] to-[#1e6bb8] text-white font-bold px-2 py-[6px] text-lg transform rotate-[45deg] shadow-lg w-[200px] text-center line-through">
-                  {service?.price} ر.س
+                  {service?.price} {t("common.currency")}
                 </div>
                 <p className="px-6 text-slate-800 font-bold mt-6 mb-3 text-2xl">
                   {service?.name}
@@ -218,18 +238,24 @@ const Courses = () => {
                 <p className="flex px-6 text-gray-500 min-h-[160px] detilas-p hover:opacity-75 cursor-pointer">
                   {service?.details}
                 </p>
-                <div className="flex justify-center gap-x-4">
-                  <p className="flex px-6 text-gray-500 min-h-[160px] detilas-p hover:opacity-75 cursor-pointer">
-                    test
-                  </p>
-                  <p className="flex px-6 text-gray-500 min-h-[160px] detilas-p hover:opacity-75 cursor-pointer">
-                    test
+
+                <div className=" justify-center gap-x-4 mt-8">
+                  <p className="flex px-6 text-gray-500  cursor-pointer gap-4 font-semibold">
+                    <p className="bg-main text-white w-1/2 rounded-lg flex justify-center items-center px-4 py-1 text-sm">
+                      Category : {service?.category?.name}
+                    </p>
+                    <p className="bg-main text-white w-1/2 rounded-lg flex justify-center items-center px-4 py-1 text-sm">
+                      Size : {service?.size?.name}
+                    </p>
                   </p>
                 </div>
                 <div className="flex justify-between items-center px-6 py-[14px]">
                   <div className="flex justify-center py-4 mx-auto">
                     <a
-                      href={`https://wa.me/${orderPhone}`}
+                      href={`https://wa.me/${orderPhone}?text=${encodeURIComponent(
+                        `مرحبا : هل يمكنني طلب هذه الخدمة ${service?.name}`
+                      )}`}
+                      target="_blank"
                       className="empty-button transform hover:scale-110 hover:shadow-lg"
                       style={{ borderRadius: "40px", fontSize: "17px" }}
                     >
@@ -273,41 +299,39 @@ const Courses = () => {
             </button>
 
             <div className="flex flex-col lg:flex-row">
-              <div className="xl:w-1/2 lg:w-1/2 w-full flex items-center">
-                {selectedService?.media ? (
-                  <img
-                    src={`http://195.35.37.105:200/storage/${selectedService.media}`}
-                    className="w-full h-full object-cover"
-                    alt={selectedService.name}
-                  />
-                ) : (
-                  <img
-                    src="https://via.placeholder.com/500x300"
-                    alt="About us"
-                    className="rounded-lg shadow-lg mx-auto"
-                  />
-                )}
-              </div>
               {/* Content Section */}
-              <div className="xl:w-1/2 lg:w-1/2 w-full py-12 px-6">
+              <div className="w-full py-12 px-6">
                 <div>
                   <h2 className="text-3xl font-bold text-slate-800 mt-5">
-                    {selectedService.name}
+                    {selectedService?.batrouns.name}
                   </h2>
                   <p className="mt-4 text-gray-500 px-6 leading-9 min-h-[150px]">
-                    {selectedService.details}
+                    {selectedService?.batrouns.details}
                   </p>
                 </div>
 
                 {/* Order Button */}
-                <div className="flex justify-between items-center px-6 py-[14px] mt-10">
+                <div className="flex justify-between items-center px-6 py-[14px]">
                   <div className="flex justify-center py-4 mx-auto">
                     <a
-                      href={`https://wa.me/${orderPhone}`}
+                      href={`${process.env.REACT_APP_MAIN_URL}/storage/${selectedService?.batrouns?.file}`}
                       className="empty-button transform hover:scale-110 hover:shadow-lg"
                       style={{ borderRadius: "40px", fontSize: "17px" }}
+                      target="_blank"
+                      onClick={(e) => {
+                        e.preventDefault(); // Prevent default behavior of opening the file
+                        const link = document.createElement("a");
+                        link.href = `${process.env.REACT_APP_MAIN_URL}/storage/${selectedService?.batrouns?.file}`;
+                        link.setAttribute(
+                          "download",
+                          selectedService?.batrouns?.file
+                        ); // Set a default filename
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link); // Cleanup the link element
+                      }}
                     >
-                      {t("common.orderViaWhatsapp")}
+                      {t("common.downloadBatroun")}
                     </a>
                   </div>
                 </div>
@@ -320,4 +344,4 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default Batrouns;

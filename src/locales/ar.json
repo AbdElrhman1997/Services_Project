@@ -2,7 +2,16 @@
   "common": {
     "orderViaWhatsapp": "طلب الخدمة عبر واتساب",
     "currency": "ر.س",
-    "NewsTickerTitle": "نخدم نخبة من الشركات الرائدة"
+    "NewsTickerTitle": "نخدم نخبة من الشركات الرائدة",
+    "goToWebsite": "الذهاب للموقع",
+    "chooseCatgoery": "اختر فئة المنتج",
+    "coverLetter": "خطاب التقديم",
+    "coverLetter_placeholder": "اكتب خطاب التقديم هنا ...",
+    "uploadCV": "تحميل السيرة الذاتية",
+    "dragOrClickToUpload": "اسحب أو انقر لتحميل ملف",
+    "myBatrouns": "قوالبي",
+    "anotherBatrouns": "قوالب أخرى قد تعجبك",
+    "downloadBatroun": "تحميل القالب"
   },
   "HomePage": {
     "Header": {
@@ -16,7 +25,7 @@
       "employment": "الوظائف",
       "courses": "الدورات التعليمية",
       "products": "المنتجات",
-      "batrouns": "باترونز",
+      "batrouns": "القوالب",
       "login": "تسجيل الدخول"
     }
   },
@@ -34,7 +43,12 @@
     "lastName": "الإسم الأخير",
     "acceptTerms": "أوافق على",
     "terms&conditions": "الشروط والأحكام",
-    "termsRequired": "يجب عليك قبول الشروط والأحكام للتسجيل"
+    "termsRequired": "يجب عليك قبول الشروط والأحكام للتسجيل",
+    "name_placeholder": "من فضلك أدخل الإسم",
+    "phone_placeholder": "من فضلك أدخل رقم الهاتف",
+    "city_placeholder": "من فضلك أدخل المدينة",
+    "message_placeholder": "اكتب ما تريد الاستفسار عنه هنا ...",
+    "selectPlaceholder": "إختر الخدمة التي تريد الاستفسار عنها"
   },
   "validation": {
     "nameRequired": "الاسم مطلوب",
@@ -45,7 +59,9 @@
     "confirmPasswordRequired": "يرجى تأكيد كلمة المرور",
     "passwordsMustMatch": "يجب أن تتطابق كلمتا المرور",
     "passwordMinLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
-    "passwordRequired": "كلمة المرور مطلوبة"
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "coverLetter_required": "خطاب التقديم مطلوب",
+    "file_required": "من فضلك قم بتحميل السيرة الذاتية"
   },
   "success": {
     "registrationSuccessful": "تم التسجيل بنجاح!"
@@ -68,13 +84,12 @@
   "contact": {
     "title": "تواصل معنا",
     "description": "نحن هنا للإجابة على أي استفسارات أو اقتراحات. لا تتردد في التواصل معنا من خلال الوسائل التالية:",
-    "addressTitle": "عنوان المكتب",
-    "address": "123 شارع النجاح، مدينة المستقبل، المملكة العربية السعودية",
-    "phoneTitle": "الهاتف",
-    "phone": "+966 123 456 789",
-    "emailTitle": "البريد الإلكتروني",
-    "email": "contact@company.com",
-    "ctaButton": "اتصل بنا الآن"
+    "phone": "رقم الهاتف",
+    "email": "البريد الإلكتروني",
+    "follow_us": "تابعنا على",
+    "ctaButton": "اتصل بنا الآن",
+    "sendMessage": "إرسال رسالة",
+    "send": "إرسال"
   },
   "courses": {
     "detailsButton": "تعرف على تفاصيل الدورة",
@@ -96,7 +111,7 @@
     "order_service_via_whatsapp": "أريد طلب الخدمة"
   },
   "footer": {
-    "quick_links": "روابط سريعة",
+    "quick_links": "الروابط السريعة ",
     "about_us": "من نحن",
     "our_services": "خدماتنا",
     "contact_us": "اتصل بنا",
@@ -154,5 +169,22 @@
     "phone": "رقم الجوال",
     "editProfile": "تعديل الملف الشخصي",
     "logout": "تسجيل الخروج"
+  },
+  "contact_validation": {
+    "name_min": "يجب أن يكون الإسم على الأقل حرفين",
+    "name_max": "يجب أن لا يزيد الإسم عن {{count}} حرفًا",
+    "name_required": "من فضلك أدخل الإسم",
+
+    "phone_invalid": "من فضلك أدخل رقم هاتف صالح (10-15 أرقام)",
+    "phone_required": "من فضلك أدخل رقم الهاتف",
+
+    "city_max": "يجب أن لا تزيد المدينة عن {{count}} حرفًا",
+    "city_required": "من فضلك أدخل المدينة",
+
+    "service_provider_required": "من فضلك اختر مقدم الخدمة",
+
+    "message_max": "الرسالة يجب أن لا تزيد عن {{count}} حرف",
+    "message_required": "من فضلك أدخل رسالتك",
+    "success_message": "تم إرسال الاستفسار سنرد عليك في أقرب وقت ممكن"
   }
 }

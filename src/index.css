@@ -4,7 +4,8 @@
 
 :root {
   --background: #ffffff;
-  --main-color: #2481ce;
+  --main-color: #2482ced8;
+  font-family: "Cairo", sans-serif, Avenir, Helvetica, Arial, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,12 +18,43 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI Historic", Helvetica, sans-serif;
+  font-family: "Cairo", sans-serif, Avenir, Helvetica, Arial, sans-serif;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
+}
+
+/* For WebKit browsers (Chrome, Safari, Edge) */
+*::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track (the background of the scrollbar) */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(
+    --main-color
+  ); /* Color of the thumb (the draggable part) */
+  border-radius: 10px; /* Rounded corners */
+  border: 2px solid #f1f1f1; /* Optional border around the thumb */
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #0056b3; /* Thumb color on hover */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin; /* Sets the width of the scrollbar */
+  scrollbar-color: var(--main-color) #f1f1f1; /* Thumb and track colors */
+}
+
+*::-webkit-scrollbar-button {
+  display: none;
 }
 
 @layer utilities {
@@ -43,7 +75,7 @@ body {
   color: white !important;
 }
 .filled-button {
-  min-width: 100px;
+  min-width: 150px;
   padding: 14px 24px;
   border-radius: 12px;
   transition: 0.15s ease-in-out;
@@ -66,7 +98,7 @@ body {
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #2481ce; /* Active dot color */
+  background-color: #2482ced8; /* Active dot color */
   width: 14px;
   height: 14px;
 }
@@ -82,7 +114,7 @@ body {
   min-height: 37vh;
   justify-content: center;
   text-align: center;
-  padding: 30px 0;
+  padding: 20px 0;
 }
 
 .detilas-p {
@@ -112,10 +144,10 @@ body {
   color: #fff;
   font-size: 64px;
   font-weight: 700;
-  line-height: 48px;
+  line-height: 1.4;
   margin: 0;
   padding: 0;
-  text-shadow: 0 4px 4px #2481ce;
+  text-shadow: 0 4px 4px #2482ced8;
   left: 0 !important;
   position: absolute;
   right: -4%;
@@ -128,4 +160,37 @@ body {
 
 .clip-path-open {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.contact-us {
+  background: url("./public/Images/ContactUS.jpg") no-repeat center center;
+  background-size: cover; /* Ensures the image covers the entire area */
+  width: 100%;
+  height: 100%;
+}
+
+.contact-form-field {
+  border-bottom: 2px solid #374151;
+  outline: none;
+  padding-bottom: 4px;
+}
+.css-hlgwow {
+  padding: 2px 0 !important;
+}
+.contact-form-field::placeholder {
+  color: #6b7280;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.detilas-p-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 2.5;
+  text-align: justify;
+}
+.test33 {
+  background: linear-gradient(91deg, #003054 14.71%, #005ea1 90.5%);
 }

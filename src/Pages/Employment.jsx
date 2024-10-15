@@ -8,6 +8,7 @@ import { CardSceleton } from "../Components/CardSceleton";
 import SectionBg from "../public/Images/sections-bg.png";
 import ApplyJobModal from "../Components/ApplyJobModal";
 import { AppContext } from "../Contexts/AppContext";
+import { toast } from "react-toastify";
 
 const Employment = () => {
   const [services, setServices] = useState([]);
@@ -15,13 +16,14 @@ const Employment = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [selectedService, setSelectedService] = useState(null); // Modal state
-  const [applyModal, setApplyModal] = useState(null); // Modal state
+  const [applyModal, setApplyModal] = useState(false);
   const { t, i18n } = useTranslation();
   const { orderPhone } = useContext(AppContext);
+  const [employment_id, setEmploymentId] = useState();
 
   // Fetch data from backend
   const fetchServices = async (
-    pageUrl = `http://195.35.37.105:200/api/employment?page=${currentPage}`
+    pageUrl = `${BASE_URL}employment?page=${currentPage}`
   ) => {
     const params = {
       // dataLimit: 3,
@@ -43,7 +45,7 @@ const Employment = () => {
 
   useEffect(() => {
     fetchServices();
-  }, [currentPage]);
+  }, [currentPage, i18n.language]);
 
   const handlePageChange = (url) => {
     if (url) {
@@ -90,7 +92,7 @@ const Employment = () => {
       <div className="relative">
         <img
           src={SectionBg}
-          className=" col-span-12 h-[280px]"
+          className=" col-span-12 h-[280px] object-cover"
           alt="aboutImage"
         />
         <div className="text-center mb-8 sections-title">
@@ -119,7 +121,7 @@ const Employment = () => {
                 {service?.price} ر.س
               </div> */}
               <img
-                src={`http://195.35.37.105:200/storage/${service?.media}`}
+                src={`${process.env.REACT_APP_MAIN_URL}/storage/${service?.image}`}
                 className="w-full h-60 object-cover"
                 style={{ borderRadius: "1rem 1rem 0 0" }}
                 alt="Property"
@@ -140,7 +142,10 @@ const Employment = () => {
                   <div
                     className="empty-button transform hover:scale-110 hover:shadow-lg flex items-center"
                     style={{ borderRadius: "40px", fontSize: "17px" }}
-                    onClick={openApplyModal}
+                    onClick={() => {
+                      openApplyModal(service);
+                      setEmploymentId(service?.id);
+                    }}
                   >
                     {t("employment.applyNow")}
                   </div>
@@ -182,10 +187,10 @@ const Employment = () => {
 
             <div className="flex flex-col lg:flex-row">
               <div className="xl:w-1/2 lg:w-1/2 w-full flex items-center">
-                {selectedService?.media ? (
+                {selectedService?.image ? (
                   <img
-                    src={`http://195.35.37.105:200/storage/${selectedService.media}`}
-                    className="w-full h-full object-cover"
+                    src={`${process.env.REACT_APP_MAIN_URL}/storage/${selectedService.image}`}
+                    className="xl:w-[460px] lg:w-[460px] md:w-[460px] w-full xl:h-[460px] lg:h-[460px] md:h-[460px] h-[220px] object-cover"
                     alt={selectedService.name}
                   />
                 ) : (
@@ -202,7 +207,7 @@ const Employment = () => {
                   <h2 className="text-3xl font-bold text-slate-800 mt-5">
                     {selectedService.name}
                   </h2>
-                  <p className="mt-4 text-gray-500 px-6 leading-9 min-h-[150px]">
+                  <p className="mt-4 text-gray-500 px-3 leading-9 min-h-[150px] xl:max-h-[300px] lg:max-h-[300px] md:max-h-[300px] max-h-[200px] overflow-y-auto text-justify">
                     {selectedService.details}
                   </p>
                 </div>
@@ -210,13 +215,13 @@ const Employment = () => {
                 {/* Order Button */}
                 <div className="flex justify-between items-center px-6 py-[14px] mt-10">
                   <div className="flex justify-center py-4 mx-auto">
-                    <a
-                      href={`https://wa.me/${orderPhone}`}
+                    <div
+                      onClick={openApplyModal}
                       className="empty-button transform hover:scale-110 hover:shadow-lg"
                       style={{ borderRadius: "40px", fontSize: "17px" }}
                     >
-                      طلب الخدمة عبر واتساب
-                    </a>
+                      {t("employment.applyNow")}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -224,10 +229,12 @@ const Employment = () => {
           </div>
         </div>
       )}
+      {console.log(selectedService)}
       {applyModal && (
         <ApplyJobModal
           handleBackgroundApplyClick={handleBackgroundApplyClick}
           closeApplyModal={closeApplyModal}
+          employment_id={employment_id}
         />
       )}
     </section>

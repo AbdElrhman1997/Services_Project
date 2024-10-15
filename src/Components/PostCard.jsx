@@ -19,7 +19,7 @@ const PostCard = ({ service }) => {
           {/* {media?.map((image, index) => (
             <img
               key={index}
-              src={`http://195.35.37.105:200/storage/${image}`}
+              src={`${process.env.REACT_APP_MAIN_URL}/storage/${image}`}
               alt={`Image ${index + 1}`}
               className="w-full h-48 object-cover rounded-lg"
             />
@@ -39,11 +39,11 @@ const PostCard = ({ service }) => {
             <div className="flex items-center">
               <p className="text-lg font-bold text-[#2481ce]">
                 {service?.price - (service?.price * service?.discount) / 100}{" "}
-                ر.س
+                {t("common.currency")}
               </p>
               {service?.discount > 0 && (
                 <p className="text-gray-500 line-through ml-4">
-                  {service?.price} ر.س
+                  {service?.price} {t("common.currency")}
                 </p>
               )}
             </div>
@@ -56,8 +56,11 @@ const PostCard = ({ service }) => {
         {/* WhatsApp Link */}
         <div className="border-t pt-4">
           <a
-            href={`https://wa.me/${orderPhone}`}
+            href={`https://wa.me/${orderPhone}?text=${encodeURIComponent(
+              `مرحبا : هل يمكنني طلب هذه الخدمة ${service?.name}`
+            )}`}
             className="text-[#2481ce] hover:underline text-sm font-semibold"
+            target="_blank"
           >
             {t("common.orderViaWhatsapp")}
           </a>

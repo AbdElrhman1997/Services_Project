@@ -49,7 +49,7 @@ const CoursesContent = () => {
 
   useEffect(() => {
     fetchCourseContent();
-  }, []);
+  }, [i18n.language]);
 
   const handlePageChange = (url) => {
     if (url) {
@@ -119,7 +119,7 @@ const CoursesContent = () => {
               >
                 <div className="relative" onClick={() => openModal(item)}>
                   <img
-                    src={`http://195.35.37.105:200/storage/${item?.image}`}
+                    src={`${process.env.REACT_APP_MAIN_URL}/storage/${item?.image}`}
                     className="w-full h-60 object-cover"
                     style={{ borderRadius: "1rem 1rem 0 0" }}
                     alt="My Course"
@@ -163,7 +163,7 @@ const CoursesContent = () => {
             <video
               controls
               className="w-full h-auto rounded-xl"
-              src={`http://195.35.37.105:200/storage/${selectedService?.media}`}
+              src={`${process.env.REACT_APP_MAIN_URL}/storage/${selectedService?.media}`}
             />
           </div>
         </div>

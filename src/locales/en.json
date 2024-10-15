@@ -2,7 +2,16 @@
   "common": {
     "orderViaWhatsapp": "Order service via WhatsApp",
     "currency": "SAR",
-    "NewsTickerTitle": "We serve a selection of leading companies"
+    "NewsTickerTitle": "We serve a selection of leading companies",
+    "goToWebsite": "Go to the website",
+    "chooseCatgoery": "Choose product category",
+    "coverLetter": "Cover Letter",
+    "coverLetter_placeholder": "Write your cover letter here...",
+    "uploadCV": "Upload CV",
+    "dragOrClickToUpload": "Drag or click to upload a file",
+    "myBatrouns": "My Batrouns",
+    "anotherBatrouns": "Other templates you may like",
+    "downloadBatroun": "Download Batroun"
   },
   "HomePage": {
     "Header": {
@@ -34,7 +43,12 @@
     "lastName": "Last Name",
     "acceptTerms": "I accept the",
     "terms&conditions": "terms and conditions",
-    "termsRequired": "You must accept the terms and conditions to register"
+    "termsRequired": "You must accept the terms and conditions to register",
+    "name_placeholder": "Enter your name",
+    "phone_placeholder": "Enter your phone number",
+    "city_placeholder": "Enter your city",
+    "message_placeholder": "Type your inquiry here ...",
+    "selectPlaceholder": "Choose the service you want to inquire about"
   },
   "validation": {
     "nameRequired": "Name is required",
@@ -45,7 +59,9 @@
     "passwordRequired": "Password is required",
     "passwordMinLength": "Password must be at least 6 characters long",
     "confirmPasswordRequired": "Please confirm your password",
-    "passwordsMustMatch": "Passwords must match"
+    "passwordsMustMatch": "Passwords must match",
+    "coverLetter_required": "Cover letter is required",
+    "file_required": "Please upload your CV"
   },
   "success": {
     "registrationSuccessful": "Registration Successful!"
@@ -56,7 +72,7 @@
   "about": {
     "title": "About Us",
     "description": "We are a company specialized in providing the best solutions and services, committed to innovation and quality. Our vision is to contribute to the development of industries through advanced technology and creativity. We proudly serve our clients around the world with a focus on meeting their needs and delivering the best possible outcomes. We are a company specialized in providing the best solutions and services, committed to innovation and quality. Our vision is to contribute to the development of industries through advanced technology and creativity. We proudly serve our clients around the world with a focus on meeting their needs and delivering the best possible outcomes. With a focus on meeting their needs and delivering the best possible outcomes, we are a company specialized in providing the best solutions and services, committed to innovation and quality. Our vision is to contribute to the development of industries through advanced technology and creativity. We proudly serve our clients around the world with a focus on meeting their needs and delivering the best possible outcomes.",
-    "cta": "Discover More"
+    "cta": "Learn More"
   },
   "consultations": {
     "header": "Consultations",
@@ -68,13 +84,12 @@
   "contact": {
     "title": "Contact Us",
     "description": "We are here to answer any inquiries or suggestions. Feel free to reach out to us through the following means:",
-    "addressTitle": "Office Address",
-    "address": "123 Success Street, Future City, Kingdom of Saudi Arabia",
-    "phoneTitle": "Phone",
-    "phone": "+966 123 456 789",
-    "emailTitle": "Email",
-    "email": "contact@company.com",
-    "ctaButton": "Contact Us Now"
+    "phone": "Phone Number",
+    "email": "Email",
+    "follow_us": "Follow Us",
+    "ctaButton": "Contact Us Now",
+    "sendMessage": "Send a Message",
+    "send": "Send"
   },
   "courses": {
     "detailsButton": "Learn More About the Course",
@@ -154,5 +169,22 @@
     "phone": "Phone",
     "editProfile": "Edit Profile",
     "logout": "Logout"
+  },
+  "contact_validation": {
+    "name_min": "Name must be at least 2 characters",
+    "name_max": "Name cannot be more than {{count}} characters",
+    "name_required": "Please enter your name",
+
+    "phone_invalid": "Please enter a valid phone number (10-15 digits)",
+    "phone_required": "Please enter your phone number",
+
+    "city_max": "City cannot be more than {{count}} characters",
+    "city_required": "Please enter your city",
+
+    "service_provider_required": "Please select a service provider",
+
+    "message_max": "Message cannot exceed {{count}} characters",
+    "message_required": "Please enter your message",
+    "success_message": "Your inquiry has been sent. We will respond to you as soon as possible."
   }
 }

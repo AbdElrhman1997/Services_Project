@@ -21,6 +21,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Profile from "./Pages/Profile";
 import CoursesContent from "./Pages/CoursesContent";
+import ProductDetails from "./Pages/ProductDetails";
+import ContactUs from "./Pages/ContactUs";
+import About from "./Pages/About";
 
 function App() {
   const { i18n } = useTranslation();
@@ -38,7 +41,12 @@ function App() {
   const shouldHideHeaderFooter = hideHeaderFooterRoutes.includes(
     location.pathname
   );
-  const hideFooterRoutes = ["/en/profile", "/ar/profile"];
+  const hideFooterRoutes = [
+    "/en/profile",
+    "/ar/profile",
+    "/ar/contact",
+    "/en/contact",
+  ];
 
   const shouldHideFooter = hideFooterRoutes.includes(location.pathname);
 
@@ -50,6 +58,7 @@ function App() {
         <Route path="/" element={<Navigate to={defaultRoute} replace />} />
         <Route path="/ar" element={<Home />} />
         <Route path="/en" element={<Home />} />
+        <Route path="/:lang/about" element={<About />} />
         <Route path="/:lang/batrouns" element={<Batrouns />} />
         <Route path="/:lang/services" element={<Services />} />
         <Route path="/:lang/consultations" element={<Consultations />} />
@@ -59,9 +68,11 @@ function App() {
         <Route path="/:lang/employment" element={<Employment />} />
         <Route path="/:lang/courses" element={<Courses />} />
         <Route path="/:lang/products" element={<Products />} />
+        <Route path="/:lang/product/details/:id" element={<ProductDetails />} />
         <Route path="/:lang/register" element={<Register />} />
         <Route path="/:lang/login" element={<Login />} />
         <Route path="/:lang/profile" element={<Profile />} />
+        <Route path="/:lang/contact" element={<ContactUs />} />
         <Route path="/:lang/courses/content/:id" element={<CoursesContent />} />
       </Routes>
       {!shouldHideHeaderFooter && !shouldHideFooter && <Footer />}

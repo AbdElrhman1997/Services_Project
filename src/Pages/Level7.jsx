@@ -44,7 +44,7 @@ const Level7 = () => {
 
   useEffect(() => {
     fetchServices();
-  }, [currentPage]);
+  }, [currentPage, i18n.language]);
 
   const handlePageChange = (url) => {
     if (url) {
@@ -96,10 +96,10 @@ const Level7 = () => {
       <div className="relative">
         <img
           src={SectionBg}
-          className=" col-span-12 h-[280px]"
+          className=" col-span-12 h-[280px] object-cover"
           alt="aboutImage"
         />
-        <div className="text-center mb-8 sections-title">
+        <div className="text-center mb-8 sections-title xl:translate-y-0 lg:translate-y-0 md:translate-y-0 -translate-y-6">
           <h2 className="sections-title">Level7</h2>
         </div>
       </div>
@@ -131,7 +131,7 @@ const Level7 = () => {
                 <div className="relative" onClick={() => openModal(service)}>
                   <video
                     className="w-full h-60 rounded-xl "
-                    src={`http://195.35.37.105:200/${service?.media}`}
+                    src={`${process.env.REACT_APP_MAIN_URL}/${service?.media}`}
                   />
                   {/* Play Icon Overlay */}
                   <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -140,7 +140,7 @@ const Level7 = () => {
                 </div>
               ) : (
                 <img
-                  src={`http://195.35.37.105:200/${service?.media}`}
+                  src={`${process.env.REACT_APP_MAIN_URL}/${service?.media}`}
                   className="w-full h-60 object-cover"
                   onClick={() => openModal2(service)}
                   style={{ borderRadius: "1rem 1rem 0 0" }}
@@ -159,17 +159,6 @@ const Level7 = () => {
                 <p className="flex px-6 text-gray-500 min-h-[160px] detilas-p hover:opacity-75 cursor-pointer">
                   {service?.details}
                 </p>
-              </div>
-              <div className="flex justify-between items-center px-6 py-[14px]">
-                <div className="flex justify-center py-4 mx-auto">
-                  <a
-                    href={`https://wa.me/${orderPhone}`}
-                    className="empty-button transform hover:scale-110 hover:shadow-lg"
-                    style={{ borderRadius: "40px", fontSize: "17px" }}
-                  >
-                    {t("common.orderViaWhatsapp")}
-                  </a>
-                </div>
               </div>
             </div>
           ))
@@ -203,7 +192,7 @@ const Level7 = () => {
             <video
               controls
               className="w-full h-auto rounded-xl "
-              src={`http://195.35.37.105:200/${selectedService?.media}`}
+              src={`${process.env.REACT_APP_MAIN_URL}/${selectedService?.media}`}
             />
           </div>
         </div>
@@ -234,12 +223,12 @@ const Level7 = () => {
                     <video
                       controls
                       className="w-full h-full rounded-xl bg-white"
-                      src={`http://195.35.37.105:200/${selectedService2?.media}`}
+                      src={`${process.env.REACT_APP_MAIN_URL}/${selectedService2?.media}`}
                     />
                   </div>
                 ) : (
                   <img
-                    src={`http://195.35.37.105:200/${selectedService2?.media}`}
+                    src={`${process.env.REACT_APP_MAIN_URL}/${selectedService2?.media}`}
                     className="w-full h-60 object-cover"
                     onClick={() => openModal2(selectedService2)}
                     style={{ borderRadius: "1rem 1rem 0 0" }}
@@ -255,18 +244,6 @@ const Level7 = () => {
                   <p className="mt-4 text-gray-500 px-6 leading-9 min-h-[150px]">
                     {selectedService2.details}
                   </p>
-                </div>
-
-                <div className="flex justify-between items-center px-6 py-[14px] mt-10">
-                  <div className="flex justify-center py-4 mx-auto">
-                    <a
-                      href={`https://wa.me/${orderPhone}`}
-                      className="empty-button transform hover:scale-110 hover:shadow-lg"
-                      style={{ borderRadius: "40px", fontSize: "17px" }}
-                    >
-                      {t("common.orderViaWhatsapp")}
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>

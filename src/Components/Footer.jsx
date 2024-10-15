@@ -27,14 +27,14 @@ const Footer = () => {
     };
 
     fetchSocialLinks();
-  }, []);
+  }, [i18n.language]);
 
   const langPrefix = i18n.language === "en" ? "/en" : "/ar";
 
   return (
     <>
       <footer
-        className="bg-gradient-to-r from-[#1a6e9e] to-[#0a4d73] text-white pt-8 pb-4 bottom-0 w-full text-center"
+        className="test33 text-white pt-8 pb-4 bottom-0 w-full text-center"
         dir={i18n.language === "ar" ? "rtl" : "ltr"}
       >
         <div className="container mx-auto">
@@ -42,93 +42,65 @@ const Footer = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {/* Quick Links Column */}
             <div>
-              <h3 className="text-xl font-semibold mb-4">
+              <h3 className="text-3xl font-bold mb-4">
                 {t("footer.quick_links")}
               </h3>
-              <nav className="flex flex-col md:gap-y-4 gap-y-10 pt-4 items-center">
-                <Link to={`${langPrefix}/`} className="hover:text-[#2481ce]">
+              <nav className="flex flex-col md:gap-y-4 gap-y-10 items-center">
+                <Link
+                  to={`${langPrefix}/`}
+                  className="hover:text-[#2481ce] text-lg font-semibold"
+                >
                   {t("HomePage.Header.home")}
                 </Link>
                 <Link
                   to={`${langPrefix}/services`}
-                  className="hover:text-[#2481ce]"
+                  className="hover:text-[#2481ce] text-lg font-semibold"
                 >
                   {t("HomePage.Header.ourServices")}
                 </Link>
                 <Link
-                  to={`${langPrefix}/consultations`}
-                  className="hover:text-[#2481ce]"
+                  to={`${langPrefix}/contact`}
+                  className="hover:text-[#2481ce] text-lg font-semibold"
                 >
-                  {t("HomePage.Header.consultations")}
+                  {t("contact.title")}
                 </Link>
-                {/* <Link
-                    to={`${langPrefix}/level7`}
-                    className="hover:text-[#2481ce]"
-                  >
-                    {t("HomePage.Header.level7")}
-                  </Link>
-                  <Link
-                    to={`${langPrefix}/posts`}
-                    className="hover:text-[#2481ce]"
-                  >
-                    {t("HomePage.Header.posts")}
-                  </Link>
-                  <Link
-                    to={`${langPrefix}/embroidery`}
-                    className="hover:text-[#2481ce]"
-                  >
-                    {t("HomePage.Header.embroidery")}
-                  </Link>
-                  <Link
-                    to={`${langPrefix}/employment`}
-                    className="hover:text-[#2481ce]"
-                  >
-                    {t("HomePage.Header.employment")}
-                  </Link>
-                  <Link
-                    to={`${langPrefix}/courses`}
-                    className="hover:text-[#2481ce]"
-                  >
-                    {t("HomePage.Header.courses")}
-                  </Link>
-                  <Link
-                    to={`${langPrefix}/products`}
-                    className="hover:text-[#2481ce]"
-                  >
-                    {t("HomePage.Header.products")}
-                  </Link>
-                  <Link
-                    to={`${langPrefix}/batrouns`}
-                    className="hover:text-[#2481ce]"
-                  >
-                    {t("HomePage.Header.batrouns")}
-                  </Link> */}
+                <Link
+                  to={`${langPrefix}/courses`}
+                  className="hover:text-[#2481ce] text-lg font-semibold"
+                >
+                  {t("HomePage.Header.courses")}
+                </Link>
               </nav>
             </div>
             {/* Contact Column */}
             <div>
-              <h3 className="text-xl font-semibold mb-4">
+              <h3 className="text-3xl font-bold mb-4">
                 {t("footer.contact_us")}
               </h3>
               <ul>
                 <li className="mb-2">
-                  <Link
-                    to="/support"
-                    className="hover:text-gray-300 text-lg text-left"
+                  <a
+                    href={`https://wa.me/${settingsData?.support_whatsapp}`}
+                    target="_blank"
+                    className="hover:text-[#2481ce] text-lg text-left"
                   >
                     {settingsData?.support_whatsapp}
-                  </Link>
+                  </a>
                 </li>
-                {/* <li className="mb-2">
-                    <Link to="/contact" className="hover:text-gray-300 text-lg">
-                      {t("footer.email")}
-                    </Link>
-                  </li> */}
+                <li className="mb-2">
+                  <a
+                    href={`mailto:${settingsData?.email}`}
+                    target="_blank"
+                    className="hover:text-[#2481ce] text-lg"
+                  >
+                    {settingsData?.email}
+                  </a>
+                </li>
               </ul>
             </div>
             {/* Socail Links */}
             <div>
-              <h3 className="text-xl font-semibold mb-4">
+              <h3 className="text-3xl font-bold mb-4">
                 {t("footer.socialLinks")}
               </h3>
               <ul className="flex gap-x-6 justify-center">
@@ -137,17 +109,17 @@ const Footer = () => {
                     href={`${settingsData?.x}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-gray-300 text-lg flex items-center"
+                    className="hover:text-[#2481ce] text-lg flex items-center"
                   >
                     <FaTwitter className="mr-2 text-3xl" />
                   </a>
                 </li>
                 <li className="my-2">
                   <a
-                    href={`${settingsData?.insta}`}
+                    href={`${settingsData?.intsa}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-gray-300 text-lg flex items-center"
+                    className="hover:text-[#2481ce] text-lg flex items-center"
                   >
                     <FaInstagram className="mr-2 text-3xl" />
                   </a>
@@ -157,7 +129,7 @@ const Footer = () => {
                     href={`${settingsData?.facebook}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-gray-300 text-lg flex items-center"
+                    className="hover:text-[#2481ce] text-lg flex items-center"
                   >
                     <FaFacebook className="mr-2 text-3xl" />
                   </a>

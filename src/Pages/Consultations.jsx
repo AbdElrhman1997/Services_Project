@@ -41,7 +41,7 @@ const Consultations = () => {
 
   useEffect(() => {
     fetchServices();
-  }, [currentPage]);
+  }, [currentPage, i18n.language]);
 
   const handlePageChange = (url) => {
     if (url) {
@@ -72,10 +72,10 @@ const Consultations = () => {
       <div className="relative">
         <img
           src={SectionBg}
-          className=" col-span-12 h-[280px]"
+          className=" col-span-12 h-[280px] object-cover"
           alt="aboutImage"
         />
-        <div className="text-center mb-8 sections-title">
+        <div className="text-center mb-8 sections-title xl:translate-y-0 lg:translate-y-0 md:translate-y-0 -translate-y-6">
           <h2 className="sections-title">
             {t("HomePage.Header.consultations")}
           </h2>
@@ -98,14 +98,15 @@ const Consultations = () => {
               ) : (
                 <div className="absolute top-6 -left-12 bg-gradient-to-r from-[#2481ce] to-[#1e6bb8] text-white font-bold px-2 py-[6px] text-lg transform rotate-[-45deg] shadow-lg w-[200px] text-center">
                   {service?.price - (service?.price * service?.discount) / 100}
+                  {t("common.currency")}
                 </div>
               )}
               <div className="absolute top-6 -right-12 bg-gradient-to-r from-[#2481ce] to-[#1e6bb8] text-white font-bold px-2 py-[6px] text-lg transform rotate-[45deg] shadow-lg w-[200px] text-center line-through">
-                {service?.price} ر.س
+                {service?.price} {t("common.currency")}
               </div>
               {service?.media ? (
                 <img
-                  src={`http://195.35.37.105:200/storage/${service?.media}`}
+                  src={`${process.env.REACT_APP_MAIN_URL}/storage/${service?.media}`}
                   className="w-full h-60 object-cover"
                   style={{ borderRadius: "1rem 1rem 0 0" }}
                   alt="batroun_image"
@@ -127,7 +128,10 @@ const Consultations = () => {
               <div className="flex justify-between items-center px-6 py-[14px]">
                 <div className="flex justify-center py-4 mx-auto">
                   <a
-                    href={`https://wa.me/${orderPhone}`}
+                    href={`https://wa.me/${orderPhone}?text=${encodeURIComponent(
+                      `مرحبا : هل يمكنني طلب هذه الخدمة ${service?.name}`
+                    )}`}
+                    target="_blank"
                     className="empty-button transform hover:scale-110 hover:shadow-lg"
                     style={{ borderRadius: "40px", fontSize: "17px" }}
                   >
@@ -154,8 +158,7 @@ const Consultations = () => {
       {/* Modal */}
       {selectedService && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center modal-overlay"
-          dir="ltr"
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center modal-overlay overflow-auto"
           onClick={handleBackgroundClick} // Handle background click
         >
           <div
@@ -170,11 +173,37 @@ const Consultations = () => {
             </button>
 
             <div className="flex flex-col lg:flex-row">
-              <div className="xl:w-1/2 lg:w-1/2 w-full">
+              <div className="xl:w-1/2 lg:w-1/2 w-full pt-12 px-6">
+                <div>
+                  <h2 className="text-3xl font-bold text-slate-800 mt-5">
+                    {selectedService.name}
+                  </h2>
+                  <p className="mt-4 text-gray-500 px-3 leading-9 min-h-[150px] xl:max-h-[300px] lg:max-h-[300px] md:max-h-[300px] max-h-[200px] overflow-y-auto text-justify">
+                    {selectedService.details}
+                  </p>
+                </div>
+
+                {/* Order Button */}
+                <div className="flex justify-between items-center px-6 py-[14px] mt-4">
+                  <div className="flex justify-center py-4 mx-auto">
+                    <a
+                      href={`https://wa.me/${orderPhone}?text=${encodeURIComponent(
+                        `مرحبا : هل يمكنني طلب هذه الخدمة ${selectedService?.name}`
+                      )}`}
+                      target="_blank"
+                      className="empty-button transform hover:scale-110 hover:shadow-lg text-main"
+                      style={{ borderRadius: "40px", fontSize: "17px" }}
+                    >
+                      {t("common.orderViaWhatsapp")}
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="xl:w-1/2 lg:w-1/2 w-full flex justify-end items-center">
                 {selectedService?.media ? (
                   <img
-                    src={`http://195.35.37.105:200/storage/${selectedService.media}`}
-                    className="w-full h-full object-cover"
+                    src={`${process.env.REACT_APP_MAIN_URL}/storage/${selectedService.media}`}
+                    className="xl:w-[460px] lg:w-[460px] md:w-[460px] w-full xl:h-[460px] lg:h-[460px] md:h-[460px] h-[220px] object-cover"
                     alt={selectedService.name}
                   />
                 ) : (
@@ -184,30 +213,6 @@ const Consultations = () => {
                     className="rounded-lg shadow-lg transform transition duration-500 hover:scale-105 mx-auto"
                   />
                 )}
-              </div>
-              {/* Content Section */}
-              <div className="xl:w-1/2 lg:w-1/2 w-full py-12 px-6">
-                <div>
-                  <h2 className="text-3xl font-bold text-slate-800 mt-5">
-                    {selectedService.name}
-                  </h2>
-                  <p className="mt-4 text-gray-500 px-6 leading-9 min-h-[150px]">
-                    {selectedService.details}
-                  </p>
-                </div>
-
-                {/* Order Button */}
-                <div className="flex justify-between items-center px-6 py-[14px] mt-10">
-                  <div className="flex justify-center py-4 mx-auto">
-                    <a
-                      href={`https://wa.me/${orderPhone}`}
-                      className="empty-button transform hover:scale-110 hover:shadow-lg"
-                      style={{ borderRadius: "40px", fontSize: "17px" }}
-                    >
-                      {t("common.orderViaWhatsapp")}
-                    </a>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

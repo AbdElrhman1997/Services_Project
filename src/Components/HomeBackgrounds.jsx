@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { IoArrowForward } from "react-icons/io5";
 
 const HomeBackgrounds = () => {
   const [backgroundSources, setBackgroundSources] = useState([]);
+  const [titleData, setTitleData] = useState();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   useEffect(() => {
@@ -19,9 +22,9 @@ const HomeBackgrounds = () => {
         const data = await response?.data?.data?.data;
         const backgrounds = data.map((item) => ({
           type: item.media.endsWith(".mp4") ? "video" : "image",
-          src: `http://195.35.37.105:200/storage/${item.media}`,
+          src: `${process.env.REACT_APP_MAIN_URL}/storage/${item.media}`,
         }));
-
+        setTitleData(data);
         setBackgroundSources(backgrounds);
       } catch (error) {
         console.error("Error fetching background sources:", error);
@@ -73,6 +76,21 @@ const HomeBackgrounds = () => {
                   loading="lazy"
                 />
               )}
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center h-full text-main">
+                <h1 className="text-7xl font-bold">{titleData[index]?.name}</h1>
+                {titleData[index]?.link && (
+                  <a
+                    href={titleData[index]?.link}
+                    className="mt-4 text-lg bg-main text-white px-5 py-3 flex gap-x-2 items-center mt-20 hover:bg-main_hover"
+                    target="_blank"
+                  >
+                    <span className="font-semibold">
+                      {t("common.goToWebsite")}
+                    </span>
+                    <IoArrowForward />
+                  </a>
+                )}
+              </div>
             </div>
           ))}
         </div>
@@ -92,12 +110,6 @@ const HomeBackgrounds = () => {
       </div>
 
       {/* Main content */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center h-full text-white">
-        <h1 className="text-4xl font-bold">Welcome to the Home Page</h1>
-        <p className="mt-4 text-lg">
-          Here is some main content on top of the video or image background.
-        </p>
-      </div>
     </div>
   );
 };

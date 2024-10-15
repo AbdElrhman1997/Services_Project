@@ -1,5 +1,5 @@
 import Marquee from "react-fast-marquee";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image1 from "../public/Images/Artboard 1.png";
 import Image2 from "../public/Images/Artboard 2.png";
 import Image3 from "../public/Images/Artboard 3.png";
@@ -14,38 +14,43 @@ import Image11 from "../public/Images/Artboard 11.png";
 import Image12 from "../public/Images/Artboard 12.png";
 import Image13 from "../public/Images/Artboard 13.png";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 const NewsTicker = () => {
-  const { t } = useTranslation();
-  const images = [
-    Image1,
-    Image2,
-    Image3,
-    Image4,
-    Image5,
-    Image6,
-    Image7,
-    Image8,
-    Image9,
-    Image10,
-    Image11,
-    Image12,
-    Image13,
-  ];
+  const { t, i18n } = useTranslation();
+  const [partners, setPartners] = useState([]);
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+
+  const fetchServices = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}partners`, {
+        headers: {
+          "Accept-Language": i18n.language,
+        },
+      });
+      const data = response?.data?.data;
+      setPartners(data);
+    } catch (error) {
+      console.error("Error fetching services:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchServices();
+  }, [i18n.language]);
 
   return (
-    <div className="mb-20">
-      <p className="text-black text-4xl text-center font-semibold mb-12 mt-12">
+    <div className="mb-10 xl:py-8 lg:py-8 md:py-8 py-2">
+      <p className="text-main xl:text-4xl lg:text-4xl md:text-4xl text-3xl text-center font-bold mt-4 mb-10 leading-relaxed px-3">
         {t("common.NewsTickerTitle")}
       </p>
       <Marquee direction="left" loop={0} autoFill={true} speed={200}>
-        {images.map((src, index) => (
+        {partners?.map((partner, index) => (
           <img
             key={index}
-            src={src}
+            src={`${process.env.REACT_APP_MAIN_URL}/storage/${partner?.image}`}
             alt={`Artboard ${index + 1}`}
-            className="h-20 mx-6"
-            style={{ width: "auto", height: "80px" }} // Use CSS for height
+            className="xl:h-20 lg:h-20 md:h-20 h-14 mx-6 my-4"
           />
         ))}
       </Marquee>

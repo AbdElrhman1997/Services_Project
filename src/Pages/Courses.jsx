@@ -8,7 +8,6 @@ import { CardSceleton } from "../Components/CardSceleton";
 import SectionBg from "../public/Images/sections-bg.png";
 import { FaPlay } from "react-icons/fa";
 import { AppContext } from "../Contexts/AppContext";
-
 const Courses = () => {
   const [services, setServices] = useState([]);
   const [myCourses, setMyCourses] = useState([]);
@@ -65,7 +64,7 @@ const Courses = () => {
   useEffect(() => {
     fetchMyCourses();
     fetchAllCourses();
-  }, []);
+  }, [i18n.language]);
 
   const handlePageChange = (url) => {
     if (url) {
@@ -110,14 +109,13 @@ const Courses = () => {
       <div className="relative">
         <img
           src={SectionBg}
-          className="col-span-12 h-[280px]"
+          className="col-span-12 h-[280px] object-cover"
           alt="aboutImage"
         />
-        <div className="text-center mb-8 sections-title">
+        <div className="text-center mb-8 sections-title xl:translate-y-0 lg:translate-y-0 md:translate-y-0 -translate-y-[72px]">
           <h2 className="sections-title">{t("HomePage.Header.courses")}</h2>
         </div>
       </div>
-
       {/* My Courses Section */}
       {myCourses?.length ? (
         <div className="max-w-[85rem] mx-auto my-12 px-4">
@@ -140,7 +138,7 @@ const Courses = () => {
                     onClick={() => openModal(item?.course)}
                   >
                     <img
-                      src={`http://195.35.37.105:200/storage/${item?.course?.image}`}
+                      src={`${process.env.REACT_APP_MAIN_URL}/storage/${item?.course?.image}`}
                       className="w-full h-60 object-cover"
                       style={{ borderRadius: "1rem 1rem 0 0" }}
                       alt="My Course"
@@ -210,16 +208,16 @@ const Courses = () => {
                   <div className="absolute top-6 -left-12 bg-gradient-to-r from-[#2481ce] to-[#1e6bb8] text-white font-bold px-2 py-[6px] text-lg transform rotate-[-45deg] shadow-lg w-[200px] text-center z-40">
                     {service?.price -
                       (service?.price * service?.discount) / 100}{" "}
-                    ر.س
+                    {t("common.currency")}
                   </div>
                 )}
                 <div className="absolute top-6 -right-12 bg-gradient-to-r from-[#2481ce] to-[#1e6bb8] text-white font-bold px-2 py-[6px] text-lg transform rotate-[45deg] shadow-lg w-[200px] text-center line-through z-40">
-                  {service?.price} ر.س
+                  {service?.price} {t("common.currency")}
                 </div>
 
                 <div className="relative" onClick={() => openModal(service)}>
                   <img
-                    src={`http://195.35.37.105:200/storage/${service?.image}`}
+                    src={`${process.env.REACT_APP_MAIN_URL}/storage/${service?.image}`}
                     className="w-full h-60 object-cover"
                     style={{ borderRadius: "1rem 1rem 0 0" }}
                     alt="Service"
@@ -240,7 +238,10 @@ const Courses = () => {
                 <div className="flex justify-between items-center px-6 py-[14px]">
                   <div className="flex justify-center py-4 mx-auto">
                     <a
-                      href={`https://wa.me/${orderPhone}`}
+                      href={`https://wa.me/${orderPhone}?text=${encodeURIComponent(
+                        `مرحبا : هل يمكنني طلب هذه الخدمة ${service?.name}`
+                      )}`}
+                      target="_blank"
                       className="empty-button transform hover:scale-110 hover:shadow-lg"
                       style={{ borderRadius: "40px", fontSize: "17px" }}
                     >
@@ -275,7 +276,7 @@ const Courses = () => {
             <video
               controls
               className="w-full h-auto rounded-xl"
-              src={`http://195.35.37.105:200/storage/${selectedService?.promotional_video}`}
+              src={`${process.env.REACT_APP_MAIN_URL}/storage/${selectedService?.promotional_video}`}
             />
           </div>
         </div>
@@ -306,7 +307,10 @@ const Courses = () => {
                 </p>
                 <div className="flex justify-between items-center px-6 py-[14px] mt-10">
                   <a
-                    href={`https://wa.me/${orderPhone}`}
+                    href={`https://wa.me/${orderPhone}?text=${encodeURIComponent(
+                      `مرحبا : هل يمكنني طلب هذه الخدمة ${selectedService2?.name}`
+                    )}`}
+                    target="_blank"
                     className="empty-button transform hover:scale-110 hover:shadow-lg"
                     style={{ borderRadius: "40px", fontSize: "17px" }}
                   >

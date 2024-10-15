@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-const AboutSection = () => {
+const About = () => {
   const { t, i18n } = useTranslation();
   const [aboutData, setAboutData] = useState();
 
@@ -27,7 +27,6 @@ const AboutSection = () => {
 
     fetchSocialLinks();
   }, [i18n.language]);
-
   return (
     <section
       className={`flex items-center ${
@@ -37,9 +36,9 @@ const AboutSection = () => {
     >
       <div className=" mx-auto flex flex-col md:flex-row items-center h-full justify-between">
         {/* Text on the Right */}
-        <div className=" md:w-1/2 w-full md:pl-12  px-6 pt-20">
+        <div className=" md:w-1/2 w-full md:pl-12  px-6 pt-20 mt-6 mb-12">
           {/* Title */}
-          <h2 className="xl:text-4xl lg:text-4xl md:text-4xl text-3xl font-extrabold mb-6 text-[#212529] xl:mx-4 lg:mx-4 md:mx-4 mx-auto border-b-[4px] border-main pb-3 w-fit">
+          <h2 className="text-4xl font-extrabold mb-6 text-[#212529] mx-4 border-b-[4px] border-main pb-3 w-fit">
             {t("about.title")}
           </h2>
 
@@ -47,17 +46,9 @@ const AboutSection = () => {
           {/* <div className="h-1 w-20 bg-[#2481ce] mb-6"></div> */}
 
           {/* Description */}
-          <p className="text-base text-black  mx-4 leading-loose font-semibold text-justify detilas-p-2">
+          <p className="text-base text-black  mx-4 leading-loose font-semibold text-justify min-h-[200px]">
             {aboutData?.details}
           </p>
-
-          {/* Call to Action */}
-          <Link
-            to={`/${i18n.language}/about`}
-            className="block px-8 py-3 my-8 bg-[#2482ced8] text-white font-semibold shadow-md hover:bg-main_hover transition duration-300 xl:text-2xl lg:text-2xl md:text-2xl text-xl w-fit mt-10 xl:mx-4 lg:mx-4 md:mx-4 mx-auto"
-          >
-            {t("about.cta")}
-          </Link>
         </div>
         <div className=" md:w-1/2 w-full mb-8 md:mb-0 relative pt-10">
           {aboutData?.image ? (
@@ -80,4 +71,4 @@ const AboutSection = () => {
   );
 };
 
-export default AboutSection;
+export default About;

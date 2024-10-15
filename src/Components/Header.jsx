@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa"; // Import profile icon
+import axios from "axios";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
-  const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State to manage mobile menu visibility
   const [authUser, setAuthUser] = useState(null); // State for authUser
-  const path = location.pathname;
 
   const handleScroll = () => {
-    const isHomePage = path === "/ar" || path === "/en";
+    const isHomePage =
+      window.location.pathname.slice(-4) === "/ar/" ||
+      window.location.pathname.slice(-4) === "/en/";
     const header = document.getElementById("header");
     if (isHomePage) {
       if (window.scrollY > 80) {
@@ -26,6 +27,10 @@ const Header = () => {
       header?.classList.remove("bg-[#00000036]", "text-white");
     }
   };
+
+  useEffect(() => {
+    handleScroll();
+  }, [window.location.pathname]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -49,6 +54,29 @@ const Header = () => {
 
   // Determine the language prefix
   const langPrefix = i18n.language === "en" ? "/en" : "/ar";
+
+  const [settingsData, setSettingsData] = useState();
+
+  useEffect(() => {
+    const fetchSocialLinks = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}setting`,
+          {
+            headers: {
+              "Accept-Language": i18n.language,
+            },
+          }
+        );
+        const data = JSON.stringify(response?.data?.data, null, 2);
+        setSettingsData(JSON.parse(data));
+      } catch (error) {
+        console.error("Error fetching social links:", error);
+      }
+    };
+
+    fetchSocialLinks();
+  }, [i18n.language]);
 
   return (
     <header
@@ -141,12 +169,12 @@ const Header = () => {
             <Link to={`${langPrefix}/courses`} className="hover:text-[#2481ce]">
               {t("HomePage.Header.courses")}
             </Link>
-            {/* <Link
+            <Link
               to={`${langPrefix}/products`}
               className="hover:text-[#2481ce]"
             >
               {t("HomePage.Header.products")}
-            </Link> */}
+            </Link>
             <Link
               to={`${langPrefix}/batrouns`}
               className="hover:text-[#2481ce]"
@@ -157,9 +185,12 @@ const Header = () => {
           </nav>
 
           {/* Website Logo */}
-          <div className="text-2xl font-bold">
-            <Link to={`${langPrefix}/`}>My Website</Link>
-          </div>
+          <Link className="text-2xl font-bold" to={"/"}>
+            <img
+              src={`${process.env.REACT_APP_MAIN_URL}/storage/${settingsData?.dark_logo}`}
+              className="w-20 mx-3"
+            />
+          </Link>
         </div>
       </div>
 
@@ -168,8 +199,9 @@ const Header = () => {
         className={`fixed top-[64px] right-0 h-full w-full bg-white transform transition-all duration-500 ease-in-out z-50 lg:hidden ${
           isMobileMenuOpen ? "clip-path-open" : "clip-path-closed"
         }`}
+        style={{ color: "#4b5563" }}
       >
-        <nav className="flex flex-col md:gap-y-4 gap-y-10 pt-4 items-center">
+        <nav className="flex flex-col md:gap-y-4 gap-y-6 pt-4 items-center">
           <Link
             to={`${langPrefix}/`}
             className="hover:text-[#2481ce]"
@@ -242,7 +274,7 @@ const Header = () => {
           >
             {t("HomePage.Header.courses")}
           </Link>
-          {/* <Link
+          <Link
             to={`${langPrefix}/products`}
             className="hover:text-[#2481ce]"
             onClick={() => {
@@ -250,7 +282,7 @@ const Header = () => {
             }}
           >
             {t("HomePage.Header.products")}
-          </Link> */}
+          </Link>
           <Link
             to={`${langPrefix}/batrouns`}
             className="hover:text-[#2481ce]"

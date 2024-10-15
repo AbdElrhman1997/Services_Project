@@ -10,29 +10,35 @@ import ImageContainer from "../Components/ImageContainer";
 import { AppContext } from "../Contexts/AppContext";
 
 const Embroidery = () => {
-  const [services, setServices] = useState([]);
-  const [paginationData, setPaginationData] = useState(null);
+  const [embroideries, setEmbroideries] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [selectedService, setSelectedService] = useState(null); // Modal state
   const { t, i18n } = useTranslation();
   const { orderPhone } = useContext(AppContext);
+  const [dataLimit, setDataLimit] = useState(1);
+  const [totalServices, setTotalServices] = useState(0);
 
   // Fetch data from backend
   const fetchServices = async (
     pageUrl = `${BASE_URL}embroidery?page=${currentPage}`
   ) => {
-    const params = {};
+    const params = {
+      dataLimit: dataLimit,
+    };
     try {
-      const response = await axios.get(pageUrl, {
-        params,
-        headers: {
-          "Accept-Language": i18n.language,
-        },
-      });
-      const data = response.data.data;
-      setServices(data.data); // Service data
-      setPaginationData(data); // Pagination data
+      axios
+        .get(pageUrl, {
+          params,
+          headers: {
+            "Accept-Language": i18n.language,
+          },
+        })
+        .then((response) => {
+          const data = response?.data?.data;
+          setEmbroideries(data?.data);
+          setTotalServices(data?.total);
+        });
     } catch (error) {
       console.error("Error fetching services:", error);
     }
@@ -40,7 +46,7 @@ const Embroidery = () => {
 
   useEffect(() => {
     fetchServices();
-  }, [currentPage]);
+  }, [currentPage, dataLimit, i18n.language]);
 
   const handlePageChange = (url) => {
     if (url) {
@@ -102,10 +108,10 @@ const Embroidery = () => {
       <div className="relative">
         <img
           src={SectionBg}
-          className="col-span-12 h-[280px]"
+          className="col-span-12 h-[280px] object-cover"
           alt={t("posts.alt.aboutImage")}
         />
-        <div className="text-center mb-8 sections-title">
+        <div className="text-center mb-8 sections-title xl:translate-y-0 lg:translate-y-0 md:translate-y-0 -translate-y-6">
           <h2 className="sections-title">{t("HomePage.Header.embroidery")}</h2>
         </div>
       </div>
@@ -116,8 +122,8 @@ const Embroidery = () => {
         </div>
 
         <div className="xl:col-span-6 lg:col-span-6 md:col-span-8 col-span-12 max-w-[85rem] mx-auto grid grid-cols-12 sm:grid-cols-12 lg:grid-cols-12 gap-y-8 min-h-[100%] my-12 px-6">
-          {services?.length ? (
-            services.map((service) => (
+          {embroideries?.length ? (
+            embroideries.map((service) => (
               <div
                 key={service.id}
                 className="col-span-12 grid grid-cols-12 bg-white shadow-xl rounded-xl"
@@ -175,6 +181,16 @@ const Embroidery = () => {
               </div>
             </div>
           )}
+          {embroideries?.length < totalServices ? (
+            <div
+              onClick={() => {
+                setDataLimit((prev) => prev + 3);
+              }}
+              className="col-span-12 text-main font-semibold text-3xl mx-auto cursor-pointer hover:opacity-80"
+            >
+              قراءة المزيد ...
+            </div>
+          ) : null}
         </div>
 
         <div className="xl:col-span-3 lg:col-span-3 md:col-span-2 top-[200px] right-0 w-[200px] text-center"></div>
@@ -201,7 +217,7 @@ const Embroidery = () => {
               <div className="xl:w-1/2 lg:w-1/2 w-full">
                 {selectedService?.media ? (
                   <img
-                    src={`http://195.35.37.105:200/storage/${selectedService.media}`}
+                    src={`${process.env.REACT_APP_MAIN_URL}/storage/${selectedService.media}`}
                     className="w-full h-full object-cover"
                     alt={selectedService.name}
                   />
@@ -226,7 +242,10 @@ const Embroidery = () => {
                 <div className="flex justify-between items-center px-6 py-[14px] mt-10">
                   <div className="flex justify-center py-4 mx-auto">
                     <a
-                      href={`https://wa.me/${orderPhone}`}
+                      href={`https://wa.me/${orderPhone}?text=${encodeURIComponent(
+                        `مرحبا : هل يمكنني طلب هذه الخدمة ${selectedService?.name}`
+                      )}`}
+                      target="_blank"
                       className="empty-button transform hover:scale-110 hover:shadow-lg"
                       style={{ borderRadius: "40px", fontSize: "17px" }}
                     >

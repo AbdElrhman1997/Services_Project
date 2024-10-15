@@ -18,11 +18,11 @@ const Home = () => {
       <section>
         <HomeBackgrounds />
         <AboutSection />
-        <NewsTicker />
         <ServicesSection />
-        <CoursesSection />
+        <NewsTicker />
         <ConsultationsSection />
         <EmploymentSection />
+        <CoursesSection />
         <ContactSection />
       </section>
     </>

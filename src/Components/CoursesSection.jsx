@@ -33,37 +33,47 @@ const CoursesSection = () => {
 
   useEffect(() => {
     fetchCourses();
-  }, []);
+  }, [i18n.language]);
 
   return (
     <section
-      className="min-h-[calc(100vh-64px)] bg-cover bg-center lg:grid md:grid grid-cols-2 place-content-center pt-8 rtl:text-right ltr:text-left"
+      className="min-h-screen bg-cover bg-center lg:grid md:grid grid-cols-2 place-content-center pt-8 rtl:text-right ltr:text-left"
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
       <div className="lg:col-span-1 md:col-span-1 mx-auto text-center lg:px-20 md:px-16 px-4 mb-16">
-        <p className="text-[#333333] text-5xl font-bold">{courses[0]?.name}</p>
-        <p className="text-[#666666] mt-6 mb-16 text-lg font-semibold">
+        <p className="text-[#333333] xl:text-5xl lg:text-5xl md:text-5xl text-4xl font-bold">
+          {courses[0]?.name}
+        </p>
+        <p className="text-[#666666] mt-6 mb-16 text-xl font-semibold">
           {courses[0]?.details}
         </p>
         <div className="lg:flex md:flex items-center justify-center gap-x-6">
           <button
-            className="empty-button my-4"
-            style={{ borderRadius: "25px" }}
+            className="empty-button my-4 "
+            style={{
+              borderRadius: "25px",
+              minWidth: "300px",
+              padding: "12px 20px",
+            }}
             onClick={handleModalToggle} // Toggle modal on button click
           >
-            <span className="hover:text-white transition-all duration-200 text-2xl">
+            <span className="hover:text-white transition-all duration-200 xl:text-xl lg:text-xl md:text-xl text-xl">
               {t("courses.detailsButton")}
             </span>
           </button>
           <button
-            className="empty-button my-4"
-            style={{ borderRadius: "25px" }}
+            className="empty-button my-4 "
+            style={{
+              borderRadius: "25px",
+              minWidth: "300px",
+              padding: "12px 20px",
+            }}
           >
             <Link
               to={`/${i18n.language}/courses`}
-              className="hover:text-white transition-all duration-200 text-2xl"
+              className="hover:text-white transition-all duration-200 xl:text-xl lg:text-xl md:text-xl text-xl"
             >
               {t("courses.viewMore")}
             </Link>
@@ -82,7 +92,7 @@ const CoursesSection = () => {
                 <video
                   width="600"
                   controls
-                  src={`http://195.35.37.105:200/storage/${courses[0]?.promotional_video}`} // Replace with your actual video path
+                  src={`${process.env.REACT_APP_MAIN_URL}/storage/${courses[0]?.promotional_video}`} // Replace with your actual video path
                   className="rounded-lg"
                 >
                   Your browser does not support the video tag.

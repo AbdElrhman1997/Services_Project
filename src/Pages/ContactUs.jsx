@@ -10,7 +10,7 @@ import * as Yup from "yup";
 import { IoPhonePortrait, IoShareSocialSharp } from "react-icons/io5";
 import { FaLocationDot, FaPhoneFlip, FaSnapchat } from "react-icons/fa6";
 
-const ContactSection = () => {
+const ContactUs = () => {
   const { t, i18n } = useTranslation();
   const [settingsData, setSettingsData] = useState();
   const [services, setServices] = useState([]);
@@ -29,6 +29,7 @@ const ContactSection = () => {
           }
         );
         const data = JSON.stringify(response?.data?.data, null, 2);
+        console.log(data);
         setServices(JSON.parse(data));
       } catch (error) {
         console.error("Error fetching social links:", error);
@@ -145,7 +146,7 @@ const ContactSection = () => {
 
   return (
     <section
-      className={`contact-us relative min-h-screen text-right ${
+      className={`contact-us relative min-h-screen text-right mt-[64px] ${
         i18n.language === "en" ? "text-left" : "text-right"
       }`}
       dir={i18n.language === "en" ? "ltr" : "rtl"}
@@ -366,4 +367,4 @@ const ContactSection = () => {
   );
 };
 
-export default ContactSection;
+export default ContactUs;

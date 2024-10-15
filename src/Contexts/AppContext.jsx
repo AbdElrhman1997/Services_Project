@@ -29,7 +29,7 @@ export const AppProvider = ({ children }) => {
     };
 
     fetchSettings();
-  }, []);
+  }, [i18n.language]);
 
   return (
     <AppContext.Provider

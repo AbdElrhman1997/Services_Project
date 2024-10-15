@@ -9,36 +9,45 @@ import SectionBg from "../public/Images/sections-bg.png";
 import ImageContainer from "../Components/ImageContainer";
 
 const Posts = () => {
-  const [services, setServices] = useState([]);
-  const [paginationData, setPaginationData] = useState(null);
+  const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [selectedService, setSelectedService] = useState(null); // Modal state
   const { t, i18n } = useTranslation();
-
+  const [loading, setLoading] = useState(false);
+  const [dataLimit, setDataLimit] = useState(3);
+  const [totalServices, setTotalServices] = useState(0);
   // Fetch data from backend
   const fetchServices = async (
     pageUrl = `${BASE_URL}posts?page=${currentPage}`
   ) => {
-    const params = {};
+    const params = {
+      dataLimit: dataLimit,
+    };
     try {
-      const response = await axios.get(pageUrl, {
-        params,
-        headers: {
-          "Accept-Language": i18n.language,
-        },
-      });
-      const data = response.data.data;
-      setServices(data.data); // Service data
-      setPaginationData(data); // Pagination data
+      setLoading(true);
+      axios
+        .get(pageUrl, {
+          params,
+          headers: {
+            "Accept-Language": i18n.language,
+          },
+        })
+        .then((response) => {
+          const data = response?.data?.data;
+          setTotalServices(data?.total);
+          setPosts(data?.data);
+          setLoading(false);
+        });
     } catch (error) {
       console.error("Error fetching services:", error);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchServices();
-  }, [currentPage]);
+  }, [currentPage, dataLimit, i18n.language]);
 
   const handlePageChange = (url) => {
     if (url) {
@@ -100,10 +109,10 @@ const Posts = () => {
       <div className="relative">
         <img
           src={SectionBg}
-          className="col-span-12 h-[280px]"
+          className="col-span-12 h-[280px] object-cover"
           alt={t("posts.alt.aboutImage")}
         />
-        <div className="text-center mb-8 sections-title">
+        <div className="text-center mb-8 sections-title xl:translate-y-0 lg:translate-y-0 md:translate-y-0 -translate-y-6">
           <h2 className="sections-title">{t("posts.title")}</h2>
         </div>
       </div>
@@ -114,11 +123,11 @@ const Posts = () => {
         </div>
 
         <div className="xl:col-span-6 lg:col-span-6 md:col-span-8 col-span-12 max-w-[85rem] mx-auto grid grid-cols-12 sm:grid-cols-12 lg:grid-cols-12 gap-y-8 min-h-[100%] my-12 px-6">
-          {services?.length ? (
-            services.map((service) => (
+          {posts?.length ? (
+            posts.map((service) => (
               <div
                 key={service.id}
-                className="col-span-12 grid grid-cols-12 bg-white shadow-xl"
+                className="col-span-12 grid grid-cols-12 bg-white shadow-xl px-1"
               >
                 <div className="flex items-center space-x-3 px-4 col-span-12 pt-4">
                   <img
@@ -173,6 +182,16 @@ const Posts = () => {
               </div>
             </div>
           )}
+          {posts?.length < totalServices ? (
+            <div
+              onClick={() => {
+                setDataLimit((prev) => prev + 3);
+              }}
+              className="col-span-12 text-main font-semibold text-3xl mx-auto cursor-pointer hover:opacity-80"
+            >
+              قراءة المزيد ...
+            </div>
+          ) : null}
         </div>
 
         <div className="xl:col-span-3 lg:col-span-3 md:col-span-2 top-[200px] right-0 w-[200px] text-center"></div>
@@ -199,7 +218,7 @@ const Posts = () => {
               <div className="xl:w-1/2 lg:w-1/2 w-full">
                 {selectedService?.media ? (
                   <img
-                    src={`http://195.35.37.105:200/${selectedService.media}`}
+                    src={`${process.env.REACT_APP_MAIN_URL}/${selectedService.media}`}
                     className="w-full h-full object-cover"
                     alt={selectedService.name}
                   />
@@ -227,6 +246,7 @@ const Posts = () => {
                       href={`https://wa.me/123456789?text=${t(
                         "posts.whatsappOrderText"
                       )}`}
+                      target="_blank"
                       className="empty-button transform hover:scale-110 hover:shadow-lg"
                       style={{ borderRadius: "40px", fontSize: "17px" }}
                     >

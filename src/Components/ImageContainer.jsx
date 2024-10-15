@@ -28,7 +28,7 @@ const ImageContainer = ({ media }) => {
               {console.log(media[0])}
               <video
                 className="w-full h-60  "
-                src={`http://dashboard.level7ksa.com/${media[0]?.image}`}
+                src={`${process.env.REACT_APP_MAIN_URL}/${media[0]?.image}`}
               />
               {/* Play Icon Overlay */}
               <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -37,7 +37,7 @@ const ImageContainer = ({ media }) => {
             </div>
           ) : (
             <img
-              src={`http://dashboard.level7ksa.com/${media[0]?.image}`}
+              src={`${process.env.REACT_APP_MAIN_URL}/${media[0]?.image}`}
               className="w-full h-60 object-cover"
               alt="Property"
             />
@@ -52,7 +52,7 @@ const ImageContainer = ({ media }) => {
             >
               <video
                 className="col-span-1 w-full h-60 "
-                src={`http://dashboard.level7ksa.com/${media[0]?.image}`}
+                src={`${process.env.REACT_APP_MAIN_URL}/${media[0]?.image}`}
               />
               {/* Play Icon Overlay */}
               <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -62,7 +62,7 @@ const ImageContainer = ({ media }) => {
             </div>
           ) : (
             <img
-              src={`http://dashboard.level7ksa.com/${media[0]?.image}`}
+              src={`${process.env.REACT_APP_MAIN_URL}/${media[0]?.image}`}
               className="col-span-6 w-full h-60 object-cover"
               alt="Property"
             />
@@ -74,7 +74,7 @@ const ImageContainer = ({ media }) => {
             >
               <video
                 className="col-span-1 w-full h-60 "
-                src={`http://dashboard.level7ksa.com/${media[1]?.image}`}
+                src={`${process.env.REACT_APP_MAIN_URL}/${media[1]?.image}`}
               />
               {/* Play Icon Overlay */}
               <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -83,7 +83,7 @@ const ImageContainer = ({ media }) => {
             </div>
           ) : (
             <img
-              src={`http://dashboard.level7ksa.com/${media[1]?.image}`}
+              src={`${process.env.REACT_APP_MAIN_URL}/${media[1]?.image}`}
               className="col-span-6 w-full h-60 object-cover"
               alt="Property"
             />
@@ -99,7 +99,7 @@ const ImageContainer = ({ media }) => {
               >
                 <video
                   className="col-span-1 w-full h-60 "
-                  src={`http://dashboard.level7ksa.com/${media[0]?.image}`}
+                  src={`${process.env.REACT_APP_MAIN_URL}/${media[0]?.image}`}
                 />
                 {/* Play Icon Overlay */}
                 <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -108,7 +108,7 @@ const ImageContainer = ({ media }) => {
               </div>
             ) : (
               <img
-                src={`http://dashboard.level7ksa.com/${media[0]?.image}`}
+                src={`${process.env.REACT_APP_MAIN_URL}/${media[0]?.image}`}
                 className="col-span-6 w-full h-60 object-cover"
                 alt="Property"
               />
@@ -120,7 +120,7 @@ const ImageContainer = ({ media }) => {
               >
                 <video
                   className="col-span-1 w-full h-60 "
-                  src={`http://dashboard.level7ksa.com/${media[1]?.image}`}
+                  src={`${process.env.REACT_APP_MAIN_URL}/${media[1]?.image}`}
                 />
                 {/* Play Icon Overlay */}
                 <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -129,7 +129,7 @@ const ImageContainer = ({ media }) => {
               </div>
             ) : (
               <img
-                src={`http://dashboard.level7ksa.com/${media[1]?.image}`}
+                src={`${process.env.REACT_APP_MAIN_URL}/${media[1]?.image}`}
                 className="col-span-6 w-full h-60 object-cover"
                 alt="Property"
               />
@@ -143,7 +143,7 @@ const ImageContainer = ({ media }) => {
               >
                 <video
                   className="col-span-1 w-full h-60 "
-                  src={`http://dashboard.level7ksa.com/${media[2]?.image}`}
+                  src={`${process.env.REACT_APP_MAIN_URL}/${media[2]?.image}`}
                 />
                 {/* Play Icon Overlay */}
                 <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -152,7 +152,7 @@ const ImageContainer = ({ media }) => {
               </div>
             ) : (
               <img
-                src={`http://dashboard.level7ksa.com/${media[2]?.image}`}
+                src={`${process.env.REACT_APP_MAIN_URL}/${media[2]?.image}`}
                 className="col-span-6 w-full h-60 object-cover"
                 alt="Property"
               />
@@ -169,7 +169,7 @@ const ImageContainer = ({ media }) => {
               >
                 <video
                   className="col-span-1 w-full h-60 "
-                  src={`http://dashboard.level7ksa.com/${media[0]?.image}`}
+                  src={`${process.env.REACT_APP_MAIN_URL}/${media[0]?.image}`}
                 />
                 {/* Play Icon Overlay */}
                 <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -178,7 +178,7 @@ const ImageContainer = ({ media }) => {
               </div>
             ) : (
               <img
-                src={`http://dashboard.level7ksa.com/${media[0]?.image}`}
+                src={`${process.env.REACT_APP_MAIN_URL}/${media[0]?.image}`}
                 className="col-span-6 w-full h-60 object-cover"
                 alt="Property"
               />
@@ -190,7 +190,7 @@ const ImageContainer = ({ media }) => {
               >
                 <video
                   className="col-span-1 w-full h-60 "
-                  src={`http://dashboard.level7ksa.com/${media[1]?.image}`}
+                  src={`${process.env.REACT_APP_MAIN_URL}/${media[1]?.image}`}
                 />
                 {/* Play Icon Overlay */}
                 <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -199,7 +199,7 @@ const ImageContainer = ({ media }) => {
               </div>
             ) : (
               <img
-                src={`http://dashboard.level7ksa.com/${media[1]?.image}`}
+                src={`${process.env.REACT_APP_MAIN_URL}/${media[1]?.image}`}
                 className="col-span-6 w-full h-60 object-cover"
                 alt="Property"
               />
@@ -213,7 +213,7 @@ const ImageContainer = ({ media }) => {
               >
                 <video
                   className="col-span-1 w-full h-60 "
-                  src={`http://dashboard.level7ksa.com/${media[2]?.image}`}
+                  src={`${process.env.REACT_APP_MAIN_URL}/${media[2]?.image}`}
                 />
                 {/* Play Icon Overlay */}
                 <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -222,7 +222,7 @@ const ImageContainer = ({ media }) => {
               </div>
             ) : (
               <img
-                src={`http://dashboard.level7ksa.com/${media[2]?.image}`}
+                src={`${process.env.REACT_APP_MAIN_URL}/${media[2]?.image}`}
                 className="col-span-6 w-full h-60 object-cover"
                 alt="Property"
               />
@@ -234,7 +234,7 @@ const ImageContainer = ({ media }) => {
               >
                 <video
                   className="col-span-1 w-full h-60 "
-                  src={`http://dashboard.level7ksa.com/${media[3]?.image}`}
+                  src={`${process.env.REACT_APP_MAIN_URL}/${media[3]?.image}`}
                 />
                 {/* Play Icon Overlay */}
                 <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -243,7 +243,7 @@ const ImageContainer = ({ media }) => {
               </div>
             ) : (
               <img
-                src={`http://dashboard.level7ksa.com/${media[3]?.image}`}
+                src={`${process.env.REACT_APP_MAIN_URL}/${media[3]?.image}`}
                 className="col-span-6 w-full h-60 object-cover"
                 alt="Property"
               />
@@ -265,7 +265,7 @@ const ImageContainer = ({ media }) => {
             <video
               width="600"
               controls
-              src={`http://dashboard.level7ksa.com/${selectedVideo?.image}`} // Replace with your actual video path
+              src={`${process.env.REACT_APP_MAIN_URL}/${selectedVideo?.image}`} // Replace with your actual video path
               className="rounded-lg"
             >
               Your browser does not support the video tag.
